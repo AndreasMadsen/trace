@@ -79,8 +79,15 @@ To active require `trace`.
   require('trace');
 ```
 
-## Error.stackTraceLimit
+### Error.stackTraceLimit
 
 The module supports the build in v8
 [Error.stackTraceLimit](http://code.google.com/p/v8/wiki/JavaScriptStackTraceApi)
 flag.
+
+This is the max depth of the stack trace, by default it is `10`, but it can
+be se to any number or `Infinity`.
+
+### Error.captureStackTrace
+
+Not implemented, sugestions are much appreciated
