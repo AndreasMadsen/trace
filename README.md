@@ -8,7 +8,7 @@ module extends all async methods in order to create super long stack traces.
 ## Installation
 
 ```sheel
-npm install async-hook
+npm install trace
 ```
 ## Disclaimer
 
