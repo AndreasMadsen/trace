@@ -1,0 +1,33 @@
+{
+  "name": "trace",
+  "description": "Creates super long stack traces",
+  "version": "0.1.0",
+  "author": "Andreas Madsen <amwebdk@gmail.com>",
+  "main": "./trace.js",
+  "scripts": {
+    "test": "tap ./test"
+  },
+  "repository" : {
+    "type": "git",
+    "url": "git://github.com/AndreasMadsen/async-hook.git"
+  },
+  "keywords": [
+    "trace",
+    "long stacks",
+    "long trace",
+    "stack",
+    "call",
+    "async"
+  ],
+  "dependencies": {
+    "async-hook": "0.2.x"
+  },
+  "devDependencies": {
+    "tap": "0.3.x"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "0.8",
+    "npm": "1"
+  }
+}
