@@ -4,68 +4,24 @@
  */
 
 var hook = require('async-hook');
+var chain = require('stack-chain');
 
-// use a already existing formater or fallback to the default one
-var format = Error.prepareStackTrace || require('./format.js');
+// add currentTrace to the callSite array
+chain.extend.attach(function (error, frames) {
+  frames = frames.slice(0);
+  frames.push.apply(frames, currentTrace);
 
-Error.prepareStackTrace = function (error, callSite) {
-  // Store v8 call site object
-  error.callSite = callSite;
-
-  // this will be filled up
-  var extendedCallSite = callSite.slice(0);
-
-  // add the stack trace from previous event loops
-  extendedCallSite.push.apply(extendedCallSite, currentTrace);
-
-  // reduce extendedCallSite to match Error.stackTraceLimit
-  extendedCallSite = filterCallSite(extendedCallSite);
-  extendedCallSite = extendedCallSite.slice(0, Error.stackTraceLimit);
-
-  // return standart formated stack trace
-  return format(error, extendedCallSite);
-};
-
-// Manage call site storeage
-Object.defineProperty(Error.prototype, 'callSite', {
-  'get': function () {
-    // return callSite if it already exist
-    if (this._callSite) {
-      return this._callSite;
-    }
-
-    // calculate call site object
-    var stack = this.stack;
-
-    // return call site object
-    return this._callSite;
-  },
-
-  'set': function (callSite) {
-    // set a hidden writable ._callSite property
-    Object.defineProperty(this, '_callSite', {
-      value: callSite,
-      configurable: true,
-      writable: true
-    });
-  },
-
-  configurable: true
+  return frames;
 });
 
-// Cleanup call site object
+// filter out trace and async-hook module
 var ignore = [module.filename, require.resolve('async-hook')];
-function filterCallSite(callSite) {
-  var ret = [];
+chain.filter.attach(function (error, frames) {
 
-  for (var i = 0, l = callSite.length; i < l; i++) {
-    if (ignore.indexOf(callSite[i].getFileName()) === -1) {
-      ret.push(callSite[i]);
-    }
-  }
-
-  return ret;
-}
+  return frames.filter(function (callSite) {
+    return (ignore.indexOf(callSite.getFileName()) === -1);
+  });
+});
 
 // keeps a long stack
 var currentTrace = null;

@@ -20,7 +20,8 @@
     "async"
   ],
   "dependencies": {
-    "async-hook": "0.2.x"
+    "async-hook": "0.2.x",
+    "stack-chain": "0.2.x"
   },
   "devDependencies": {
     "tap": "0.3.x"
