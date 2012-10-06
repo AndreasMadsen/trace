@@ -6,6 +6,9 @@
 var hook = require('async-hook');
 var chain = require('stack-chain');
 
+// Contains the stacktrace the current stacktrace
+var currentTrace = null;
+
 // add currentTrace to the callSite array
 chain.extend.attach(function (error, frames) {
   frames = frames.slice(0);
@@ -24,9 +27,6 @@ chain.filter.attach(function (error, frames) {
 });
 
 // keeps a long stack
-var currentTrace = null;
-var currentCallback = null;
-
 hook.callback.attach(stackManager);
 hook.event.attach(stackManager);
 
@@ -40,7 +40,6 @@ function stackManager(name, callback) {
   // this is executed in another event loop
   return function capture() {
     currentTrace = trace;
-    currentCallback = capture;
     return callback.apply(this, arguments);
   };
 }
