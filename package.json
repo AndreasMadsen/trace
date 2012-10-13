@@ -9,7 +9,7 @@
   },
   "repository" : {
     "type": "git",
-    "url": "git://github.com/AndreasMadsen/async-hook.git"
+    "url": "git://github.com/AndreasMadsen/trace.git"
   },
   "keywords": [
     "trace",
