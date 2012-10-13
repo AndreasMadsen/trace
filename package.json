@@ -5,7 +5,7 @@
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./trace.js",
   "scripts": {
-    "test": "tap ./test"
+    "test": "tap ./test/simple/* ./test/regression/*"
   },
   "repository" : {
     "type": "git",
@@ -24,7 +24,8 @@
     "stack-chain": "0.2.x"
   },
   "devDependencies": {
-    "tap": "0.3.x"
+    "tap": "0.3.x",
+    "clarify": "0.2.x"
   },
   "license": "MIT",
   "engines": {
