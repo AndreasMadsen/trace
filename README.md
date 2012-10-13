@@ -10,9 +10,13 @@ module extends all async methods in order to create super long stack traces.
 ```sheel
 npm install trace
 ```
-## Disclaimer
+## Found a bug?
 
-This has not yet been tested extensively!
+Createing long stack traces in v8 isn't easy, I therefor encourage you to
+file any bugs you may find, even if you can't reduce the issue to only involve
+nodecore modules. I will then use all my power to fix it.
+
+> I want this module to be the best and most trusted async trace module ever!
 
 ## Example
 
