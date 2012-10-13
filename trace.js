@@ -40,6 +40,9 @@ function stackManager(name, callback) {
   // this is executed in another event loop
   return function capture() {
     currentTrace = trace;
-    return callback.apply(this, arguments);
+    var ret = callback.apply(this, arguments);
+    currentTrace = null;
+
+    return ret;
   };
 }
