@@ -1,4 +1,4 @@
-#trace
+#trace [![Build Status](https://secure.travis-ci.org/AndreasMadsen/trace.png)](http://travis-ci.org/AndreasMadsen/trace)
 
 > Creates super long stack traces
 
