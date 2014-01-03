@@ -16,7 +16,7 @@ test("test module method (fs.readFile)", function test(t) {
     //       and that nodecore and tap paths also has been removed
     t.deepEqual(produce(), [
       'Error: trace',
-      'at producer (./test/produce.js:16:16)',
+      'at producer (./test/produce.js:16:24)',
       'at callback (./test/simple/fsRead.js:17:17)',
       'at Test.test (./test/simple/fsRead.js:14:6)',
       'at Object.<anonymous> (./test/simple/fsRead.js:12:1)'

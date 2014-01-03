@@ -12,8 +12,8 @@ require('clarify');
 var tapPath = path.dirname(require.resolve('tap'));
 var tracePath = path.dirname(require.resolve('../trace'));
 
-module.exports = function producer() {
-  var stack = (new Error('trace')).stack.split('\n');
+module.exports = function producer(error) {
+  var stack = (error ||new Error('trace')).stack.split('\n');
 
   return stack
     .filter(function (line) {

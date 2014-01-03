@@ -17,7 +17,7 @@ test("test process method (nextTick)", function test(t) {
     //       and that nodecore and tap paths also has been removed
     t.deepEqual(produce(), [
       'Error: trace',
-      'at producer (./test/produce.js:16:16)',
+      'at producer (./test/produce.js:16:24)',
       'at callback (./test/simple/nextTick.js:18:17)',
       'at Test.test (./test/simple/nextTick.js:14:11)',
       'at Object.<anonymous> (./test/simple/nextTick.js:11:1)'
