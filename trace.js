@@ -20,7 +20,8 @@ chain.filter.attach(function (error, frames) {
 });
 
 // Setup an async listener with the handlers listed below
-process.addAsyncListener(asyncFunctionInitialized, {
+process.addAsyncListener({
+  'create': asyncFunctionInitialized,
   'before': asyncCallbackBefore,
   'error': asyncCallbackError,
   'after': asyncCallbackAfter
