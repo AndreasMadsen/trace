@@ -43,7 +43,7 @@ setTimeout(function () {
 }, 200);
 ```
 
-Without the `trace` and `clarify` the output is:
+Without the `trace` and [`clarify`](https://github.com/AndreasMadsen/clarify) the output is:
 
 ```
 /Users/Andreas/Sites/node_modules/trace/test.js:12
@@ -54,7 +54,7 @@ Error: custom error
     at process._tickCallback (node.js:599:11)
 ```
 
-With `trace` and `clarify` the output is:
+With `trace` and [`clarify`](https://github.com/AndreasMadsen/clarify) the output is:
 
 ```
 /Users/Andreas/Sites/node_modules/trace/test.js:12
