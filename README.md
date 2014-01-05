@@ -3,7 +3,7 @@
 > Creates super long stack traces
 
 With the help of `AsyncListener` and [stack-chain](https://github.com/AndreasMadsen/stack-chain) this
-module will provide stack traces there extend beyond the current tick or turn.
+module will provide stack traces there goes beyond the current tick or turn.
 
 ## Installation
 
@@ -43,7 +43,7 @@ setTimeout(function () {
 }, 200);
 ```
 
-Without the `trace` and [`clarify`](https://github.com/AndreasMadsen/clarify) the output is:
+Without `trace` and [`clarify`](https://github.com/AndreasMadsen/clarify) the output is:
 
 ```
 /Users/Andreas/Sites/node_modules/trace/test.js:12
