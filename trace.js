@@ -12,13 +12,6 @@ chain.extend.attach(function (error, frames) {
   return frames;
 });
 
-// filter out call sites from this file
-chain.filter.attach(function (error, frames) {
-  return frames.filter(function (callSite) {
-    return (callSite.getFileName() !== module.filename);
-  });
-});
-
 // Setup an async listener with the handlers listed below
 process.addAsyncListener({
   'create': asyncFunctionInitialized,
@@ -30,7 +23,9 @@ process.addAsyncListener({
 function asyncFunctionInitialized() {
   // Capture the callSites for this tick
   var err = new Error();
-  var trace = err.callSite.slice(0);
+  // .slice(2) removes first this file and then process.runAsyncQueue from the
+  // callSites array. Both of those only exists because of this module.
+  var trace = err.callSite.slice(2);
 
   // Add all the callSites from previuse ticks
   trace.push.apply(trace, callSitesForPreviuseTicks);
