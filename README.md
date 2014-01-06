@@ -46,65 +46,59 @@ setTimeout(function () {
 Without `trace` and [`clarify`](https://github.com/AndreasMadsen/clarify) the output is:
 
 ```
-/Users/Andreas/Sites/node_modules/trace/test.js:12
+/Users/Andreas/Sites/node_modules/trace/example.js:12
       throw new Error("custom error");
             ^
 Error: custom error
-    at /Users/Andreas/Sites/node_modules/trace/test.js:12:13
+    at /Users/Andreas/Sites/node_modules/trace/example.js:12:13
     at process._tickCallback (node.js:599:11)
 ```
 
 With `trace` and [`clarify`](https://github.com/AndreasMadsen/clarify) the output is:
 
 ```
-/Users/Andreas/Sites/node_modules/trace/test.js:12
+/Users/Andreas/Sites/node_modules/trace/example.js:12
       throw new Error("custom error");
             ^
 Error: custom error
-    at /Users/Andreas/Sites/node_modules/trace/test.js:12:13
-    at /Users/Andreas/Sites/node_modules/trace/test.js:11:13
-    at null._onTimeout (/Users/Andreas/Sites/node_modules/trace/test.js:10:6)
-    at Object.<anonymous> (/Users/Andreas/Sites/node_modules/trace/test.js:9:1)
+    at /Users/Andreas/Sites/node_modules/trace/example.js:12:13
+    at /Users/Andreas/Sites/node_modules/trace/example.js:11:13
+    at null._onTimeout (/Users/Andreas/Sites/node_modules/trace/example.js:10:6)
+    at Object.<anonymous> (/Users/Andreas/Sites/node_modules/trace/example.js:9:1)
 ```
 
 With only `trace` the output is (yes long so use `Error.stackTraceLimit = 25` or something like that).
 
 ```
-/Users/Andreas/Sites/node_modules/trace/test.js:12
+/Users/Andreas/Sites/node_modules/trace/example.js:12
       throw new Error("custom error");
             ^
 Error: custom error
-    at /Users/Andreas/Sites/node_modules/trace/test.js:12:13
+    at /Users/Andreas/Sites/node_modules/trace/example.js:12:13
     at process._tickCallback (node.js:599:11)
-    at runAsyncQueue (node.js:324:37)
     at process.nextTick (node.js:625:9)
-    at /Users/Andreas/Sites/node_modules/trace/test.js:11:13
+    at /Users/Andreas/Sites/node_modules/trace/example.js:11:13
     at fs.js:258:14
     at Object.oncomplete (fs.js:97:15)
-    at process.runAsyncQueue (node.js:324:37)
     at Object.fs.close (fs.js:379:11)
     at close (fs.js:249:8)
     at afterRead (fs.js:239:25)
     at Object.wrapper [as oncomplete] (fs.js:437:17)
-    at process.runAsyncQueue (node.js:324:37)
     at Object.fs.read (fs.js:440:11)
     at read (fs.js:222:10)
     at fs.js:213:7
     at Object.oncomplete (fs.js:97:15)
-    at process.runAsyncQueue (node.js:324:37)
     at Object.fs.fstat (fs.js:650:11)
     at fs.js:198:8
     at Object.oncomplete (fs.js:97:15)
-    at process.runAsyncQueue (node.js:324:37)
     at Object.fs.open (fs.js:401:11)
     at Object.fs.readFile (fs.js:194:6)
-    at null._onTimeout (/Users/Andreas/Sites/node_modules/trace/test.js:10:6)
+    at null._onTimeout (/Users/Andreas/Sites/node_modules/trace/example.js:10:6)
     at Timer.listOnTimeout (timers.js:124:15)
-    at runAsyncQueue (node.js:324:37)
     at Object.exports.active (timers.js:194:5)
     at exports.setTimeout (timers.js:261:11)
     at global.setTimeout (node.js:177:27)
-    at Object.<anonymous> (/Users/Andreas/Sites/node_modules/trace/test.js:9:1)
+    at Object.<anonymous> (/Users/Andreas/Sites/node_modules/trace/example.js:9:1)
     at Module._compile (module.js:449:26)
     at Object.Module._extensions..js (module.js:467:10)
     at Module.load (module.js:349:32)
