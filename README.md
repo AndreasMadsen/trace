@@ -11,8 +11,8 @@ module will provide stack traces there goes beyond the current tick or turn.
 npm install trace
 ```
 
-Since version `1.0.0` trace has been rewriten for node 0.11, for previuse node
-versions use version `0.2.1` of trace.
+Since version `1.0.0` trace has been rewriten for node 0.11.12 and above, for
+previuse node versions use version `0.2.1` of trace.
 
 ## Found a bug?
 
