@@ -1,4 +1,5 @@
 
+var tracing = require('tracing');
 var chain = require('stack-chain');
 
 // Contains the call site objects of all the prevouse ticks leading
@@ -13,7 +14,7 @@ chain.extend.attach(function (error, frames) {
 });
 
 // Setup an async listener with the handlers listed below
-process.addAsyncListener({
+tracing.addAsyncListener({
   'create': asyncFunctionInitialized,
   'before': asyncCallbackBefore,
   'error': asyncCallbackError,
