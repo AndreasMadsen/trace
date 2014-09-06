@@ -1,7 +1,7 @@
 {
   "name": "trace",
   "description": "Creates super long stack traces",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./trace.js",
   "scripts": {
