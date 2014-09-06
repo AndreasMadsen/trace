@@ -26,7 +26,7 @@ function asyncFunctionInitialized() {
   var err = new Error();
   // .slice(2) removes first this file and then process.runAsyncQueue from the
   // callSites array. Both of those only exists because of this module.
-  var trace = err.callSite.slice(2);
+  var trace = err.callSite.original.slice(2);
 
   // Add all the callSites from previuse ticks
   trace.push.apply(trace, callSitesForPreviuseTicks);
