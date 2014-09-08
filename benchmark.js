@@ -2,7 +2,7 @@
 var summary = require('summary');
 
 function timeit(top, callback) {
-    var times = new Float64Array(1000000);
+    var times = new Float64Array(top);
     (function recursive(i) {
         var tick = process.hrtime();
         setImmediate(function () {
