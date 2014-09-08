@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "tap": "0.4.x",
+    "summary": "0.3.x",
     "clarify": "~1.0.3"
   },
   "license": "MIT",

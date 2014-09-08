@@ -1,11 +1,19 @@
 
-function timeit(top, callback) {
-    var tick = process.hrtime();
+var summary = require('summary');
 
+function timeit(top, callback) {
+    var times = new Float64Array(1000000);
     (function recursive(i) {
+        var tick = process.hrtime();
         setImmediate(function () {
-            if (i === top) callback(process.hrtime(tick));
-            else recursive(i + 1);
+            if (i === top) {
+                callback(summary(times));
+            } else {
+                var tock = process.hrtime(tick);
+                times[i] = tock[0] * 1e9 + tock[1];
+
+                recursive(i + 1);
+            }
         });
     })(0);
 }
@@ -16,9 +24,8 @@ function timeit(top, callback) {
 
         function bench(name, callback) {
             var cp = fork(__filename, ['baseline']);
-            cp.once('message', function (result) {
-                var ns = result.time[0] * 1e9 + result.time[1];
-                console.log(name + ': ' + (ns / result.top) + ' ns/tick');
+            cp.once('message', function (stat) {
+                console.log(name + ': ' + stat.mean.toFixed(4) + ' ± ' + (1.96 * stat.sd).toFixed(4) + ' ns/tick');
             });
             cp.once('close', callback);
         }
@@ -31,17 +38,17 @@ function timeit(top, callback) {
     },
 
     'baseline': function () {
-        var top = 1000000;
-        timeit(top, function (time) {
-            process.send({ "time": time, "top": top });
+        var top = 100000;
+        timeit(top, function (stat) {
+            process.send({ "mean": stat.mean(), "sd": stat.sd() });
         });
     },
 
     'trace': function () {
         require('./trace.js');
-        var top = 1000000;
-        timeit(top, function (time) {
-            process.send({ "time": time, "top": top });
+        var top = 100000;
+        timeit(top, function (stat) {
+            process.send({ "mean": stat.mean(), "sd": stat.sd() });
         });
     }
 })[process.argv[2] || 'master']();
