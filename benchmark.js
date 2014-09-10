@@ -46,7 +46,7 @@ function timeit(top, callback) {
 
     'trace': function () {
         require('./trace.js');
-        var top = 5000;
+        var top = 50000;
         timeit(top, function (stat) {
             process.send({ "mean": stat.mean(), "sd": stat.sd() });
         });
