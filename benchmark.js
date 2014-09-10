@@ -23,7 +23,7 @@ function timeit(top, callback) {
         var fork = require('child_process').fork;
 
         function bench(name, callback) {
-            var cp = fork(__filename, ['baseline']);
+            var cp = fork(__filename, [name]);
             cp.once('message', function (stat) {
                 console.log(name + ': ' + stat.mean.toFixed(4) + ' ± ' + (1.96 * stat.sd).toFixed(4) + ' ns/tick');
             });
@@ -46,7 +46,7 @@ function timeit(top, callback) {
 
     'trace': function () {
         require('./trace.js');
-        var top = 100000;
+        var top = 5000;
         timeit(top, function (stat) {
             process.send({ "mean": stat.mean(), "sd": stat.sd() });
         });
