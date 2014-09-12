@@ -30,6 +30,10 @@ function asyncFunctionInitialized() {
   // Add all the callSites from previuse ticks
   trace.push.apply(trace, callSitesForPreviuseTicks);
 
+  // Cut the trace so it don't contain callSites there won't be shown anyway
+  // because of Error.stackTraceLimit
+  trace.splice(Error.stackTraceLimit);
+
   // `trace` now contains callSites from this ticks and all the ticks leading
   // up to this event in time
   return trace;
@@ -43,7 +47,7 @@ function asyncCallbackBefore(context, trace) {
 
 function asyncCallbackError(trace, error) {
   // Ensure that the error `stack` string is constructed before the
-  // previuseTicks is cleared.
+  // `callSitesForPreviuseTicks` is cleared.
   // The construction logic is defined in
   //  - https://github.com/v8/v8/blob/master/src/messages.js -> captureStackTrace
   // and in the stack-chain module invoked earlier in this file
@@ -54,9 +58,10 @@ function asyncCallbackError(trace, error) {
 }
 
 function asyncCallbackAfter(context, trace) {
-  // clear previuseTicks. This allows for other async actions to get there
-  // very own trace stack and helps in preventing a trace stack to get attach
-  // to an error `stack` string, in the unknown case where asyncCallbackBefore
-  // wasn't invoked. (This is an unseen event since trace v1.0.0)
+  // clear `callSitesForPreviuseTicks`. This allows for other async actions
+  // to get there very own trace stack and helps in preventing a trace stack to
+  // get attach to an error `stack` string, in the unknown case where
+  // asyncCallbackBefore wasn't invoked.
+  // (This is an unseen event since trace v1.0.0)
   callSitesForPreviuseTicks = null;
 }
