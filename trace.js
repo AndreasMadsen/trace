@@ -8,7 +8,6 @@ var callSitesForPreviuseTicks = null;
 
 // add currentTrace to the callSite array
 chain.extend.attach(function (error, frames) {
-  frames = frames.slice(0);
   frames.push.apply(frames, callSitesForPreviuseTicks);
   return frames;
 });
