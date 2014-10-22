@@ -7,7 +7,7 @@
   "scripts": {
     "test": "tap ./test/simple/* ./test/regression/*"
   },
-  "repository" : {
+  "repository": {
     "type": "git",
     "url": "git://github.com/AndreasMadsen/trace.git"
   },
@@ -20,12 +20,12 @@
     "async"
   ],
   "dependencies": {
-    "stack-chain": "~1.2.0"
+    "stack-chain": "~1.3.0"
   },
   "devDependencies": {
-    "tap": "0.4.x",
+    "clarify": "^1.0.5",
     "summary": "0.3.x",
-    "clarify": "~1.0.3"
+    "tap": "0.4.x"
   },
   "license": "MIT",
   "engines": {

@@ -24,7 +24,7 @@ function asyncFunctionInitialized() {
   // Capture the callSites for this tick
   // .slice(2) removes first this file and then process.runAsyncQueue from the
   // callSites array. Both of those only exists because of this module.
-  var trace = chain.callSite().slice(2);
+  var trace = chain.callSite({ extend: false, filter: true, slice: 2 });
 
   // Add all the callSites from previuse ticks
   trace.push.apply(trace, callSitesForPreviuseTicks);
