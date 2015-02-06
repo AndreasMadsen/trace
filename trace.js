@@ -1,6 +1,14 @@
 
-var tracing = require('tracing');
 var chain = require('stack-chain');
+var fs = require('fs');
+
+var tracing, tracingFilepath;
+try {
+  tracing = require('tracing');
+} catch (e) {
+  tracing = require('./tracing_polyfill.js');
+  tracingFilepath = require.resolve('./tracing_polyfill.js');
+}
 
 // Contains the call site objects of all the prevouse ticks leading
 // up to this one
@@ -11,6 +19,14 @@ chain.extend.attach(function (error, frames) {
   frames.push.apply(frames, callSitesForPreviuseTicks);
   return frames;
 });
+
+if (tracingFilepath) {
+  chain.filter.attach(function (error, frames) {
+    return frames.filter(function (callSite) {
+      return callSite.getFileName() !== tracingFilepath;
+    });
+  });
+}
 
 // Setup an async listener with the handlers listed below
 tracing.addAsyncListener({

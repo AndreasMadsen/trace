@@ -22,14 +22,14 @@ test("test an issue with http where events wheren't removed", function test(t) {
         self.close(function close() {
 
           t.deepEqual(produce(), [
-            "Error: trace",
-            "at producer (./test/produce.js:16:24)",
-            "at Server.close (./test/regression/httpClose.js:24:23)",
-            "at IncomingMessage.end (./test/regression/httpClose.js:22:14)",
-            "at ClientRequest.get (./test/regression/httpClose.js:19:11)",
-            "at Server.listen (./test/regression/httpClose.js:18:10)",
-            "at Test.test (./test/regression/httpClose.js:14:6)",
-            "at Object.<anonymous> (./test/regression/httpClose.js:10:1)"
+            'Error: trace',
+            'at producer (./test/produce.js:16:25)',
+            'at Server.close (./test/regression/httpClose.js:24:23)',
+            'at IncomingMessage.end (./test/regression/httpClose.js:22:14)',
+            'at ClientRequest.get (./test/regression/httpClose.js:19:11)',
+            'at Server.listen (./test/regression/httpClose.js:18:10)',
+            'at Test.test (./test/regression/httpClose.js:14:6)',
+            'at Object.<anonymous> (./test/regression/httpClose.js:10:1)'
           ]);
           t.end();
         });

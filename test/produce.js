@@ -13,7 +13,7 @@ var tapPath = path.dirname(require.resolve('tap'));
 var tracePath = path.dirname(require.resolve('../trace'));
 
 module.exports = function producer(error) {
-  var stack = (error ||new Error('trace')).stack.split('\n');
+  var stack = (error || new Error('trace')).stack.split('\n');
 
   return stack
     .filter(function (line) {
@@ -22,6 +22,7 @@ module.exports = function producer(error) {
     .map(function (line) {
       line = line.trim();
       line = line.replace(tracePath, '.');
+      line = line.replace(' [as _onTimeout]', '');
       return line;
     });
 };

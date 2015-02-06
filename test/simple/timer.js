@@ -17,8 +17,8 @@ test("test global method (setTimeout)", function test(t) {
     //       and that nodecore and tap paths also has been removed
     t.deepEqual(produce(), [
       'Error: trace',
-      'at producer (./test/produce.js:16:24)',
-      'at callback [as _onTimeout] (./test/simple/timer.js:18:17)',
+      'at producer (./test/produce.js:16:25)',
+      'at callback (./test/simple/timer.js:18:17)',
       'at Test.test (./test/simple/timer.js:14:3)',
       'at Object.<anonymous> (./test/simple/timer.js:11:1)'
     ]);

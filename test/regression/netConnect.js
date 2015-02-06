@@ -10,7 +10,7 @@ test("test an issue where there are multiply internal async events", function te
   var socket = net.connect(24075); // connection refused
   socket.once('error', function (error) {
     t.deepEqual(produce(error), [
-      'Error: connect ECONNREFUSED',
+      'Error: connect ECONNREFUSED' + (process.version[1] === '1' ? ' 127.0.0.1:24075' : ''),
       'at Test.test (./test/regression/netConnect.js:10:20)',
       'at Object.<anonymous> (./test/regression/netConnect.js:8:1)'
     ]);
