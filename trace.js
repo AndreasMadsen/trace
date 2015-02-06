@@ -1,6 +1,5 @@
 
 var chain = require('stack-chain');
-var fs = require('fs');
 
 var tracing, tracingFilepath;
 try {

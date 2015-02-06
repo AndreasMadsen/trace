@@ -1,4 +1,3 @@
-'use strict';
 
 // This is an incomplete polyfill for tracing. It is mostly incomplete
 // because it only supports one `addAsyncListener` call. It also doesn't
