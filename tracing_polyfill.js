@@ -12,10 +12,15 @@ var globalUserData = null;
 
 function addAsyncListener(hooks) {
   // Enable asyncWrap and call init hook function on async initialization
-  var asyncHooksObject = {};
-  var kCallInitHook = 0;
-  asyncWrap.setupHooks(asyncHooksObject, create, before, after);
-  asyncHooksObject[kCallInitHook] = 1;
+  if (asyncWrap.enable) {
+      asyncWrap.setupHooks(create, before, after);
+      asyncWrap.enable();
+  } else {
+    var asyncHooksObject = {};
+    var kCallInitHook = 0;
+    asyncWrap.setupHooks(asyncHooksObject, create, before, after);
+    asyncHooksObject[kCallInitHook] = 1;
+  }
 
   function create() {
     if (this.constructor.name !== 'Timer') {
@@ -38,10 +43,17 @@ function addAsyncListener(hooks) {
   }
 
   // Wrap timers
+  var globalTimersAliased = (global.setTimeout === timers.setTimeout);
   wrap(process, 'nextTick', hooks);
   wrap(timers, 'setImmediate', hooks);
   wrap(timers, 'setTimeout', hooks);
   wrap(timers, 'setInterval', hooks);
+
+  if (globalTimersAliased) {
+    global.setTimeout = timers.setTimeout;
+    global.setInterval = timers.setInterval;
+    global.setImmediate = timers.setImmediate;
+  }
 
   // Intercept throws
   var oldfatalException = process._fatalException;
@@ -59,6 +71,7 @@ function wrap(object, method, hooks) {
   object[method] = function () {
     var userData = hooks.create();
     var callback = arguments[0];
+
     arguments[0] = function tracing_polyfill_remove_me_from_stack() {
       hooks.before(null, userData);
       globalUserData = userData;
