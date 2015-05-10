@@ -1,7 +1,7 @@
 {
   "name": "trace",
   "description": "Creates super long stack traces",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./trace.js",
   "scripts": {
@@ -25,7 +25,7 @@
   "devDependencies": {
     "clarify": "^1.0.5",
     "summary": "0.3.x",
-    "tap": "0.4.x"
+    "tap": "1.0.x"
   },
   "license": "MIT",
   "engines": {

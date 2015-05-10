@@ -28,7 +28,7 @@ test("test an issue with http where events wheren't removed", function test(t) {
             'at IncomingMessage.end (./test/regression/httpClose.js:22:14)',
             'at ClientRequest.get (./test/regression/httpClose.js:19:11)',
             'at Server.listen (./test/regression/httpClose.js:18:10)',
-            'at Test.test (./test/regression/httpClose.js:14:6)',
+            'at test (./test/regression/httpClose.js:14:6)',
             'at Object.<anonymous> (./test/regression/httpClose.js:10:1)'
           ]);
           t.end();

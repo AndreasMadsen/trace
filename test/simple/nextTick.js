@@ -19,7 +19,7 @@ test("test process method (nextTick)", function test(t) {
       'Error: trace',
       'at producer (./test/produce.js:16:25)',
       'at callback (./test/simple/nextTick.js:18:17)',
-      'at Test.test (./test/simple/nextTick.js:14:11)',
+      'at test (./test/simple/nextTick.js:14:11)',
       'at Object.<anonymous> (./test/simple/nextTick.js:11:1)'
     ]);
 

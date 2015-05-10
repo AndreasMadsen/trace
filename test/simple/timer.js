@@ -19,7 +19,7 @@ test("test global method (setTimeout)", function test(t) {
       'Error: trace',
       'at producer (./test/produce.js:16:25)',
       'at callback (./test/simple/timer.js:18:17)',
-      'at Test.test (./test/simple/timer.js:14:3)',
+      'at test (./test/simple/timer.js:14:3)',
       'at Object.<anonymous> (./test/simple/timer.js:11:1)'
     ]);
 

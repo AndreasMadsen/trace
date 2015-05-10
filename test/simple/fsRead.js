@@ -18,7 +18,7 @@ test("test module method (fs.readFile)", function test(t) {
       'Error: trace',
       'at producer (./test/produce.js:16:25)',
       'at callback (./test/simple/fsRead.js:17:17)',
-      'at Test.test (./test/simple/fsRead.js:14:6)',
+      'at test (./test/simple/fsRead.js:14:6)',
       'at Object.<anonymous> (./test/simple/fsRead.js:12:1)'
     ]);
 

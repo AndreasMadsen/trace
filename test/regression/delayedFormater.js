@@ -23,7 +23,7 @@ test("set Error.prepearStackTrace", function test(t) {
   t.deepEqual(produce(), [
     'Error: trace',
     'at-hack producer (./test/produce.js:16:25)',
-    'at-hack Test.test (./test/regression/delayedFormater.js:23:15)',
+    'at-hack test (./test/regression/delayedFormater.js:23:15)',
     'at-hack Object.<anonymous> (./test/regression/delayedFormater.js:8:1)'
   ]);
 
