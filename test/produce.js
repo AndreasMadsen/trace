@@ -1,6 +1,7 @@
+'use strict';
 
 // require nodecore modules
-var path = require('path');
+const path = require('path');
 
 // There is no limit for the size of the stack trace
 Error.stackTraceLimit = Infinity;
@@ -9,11 +10,11 @@ Error.stackTraceLimit = Infinity;
 require('clarify');
 
 // construct filepath there will be searched for in the stacktrace simplifcation
-var tapPath = path.dirname(require.resolve('tap'));
-var tracePath = path.dirname(require.resolve('../trace'));
+const tapPath = path.dirname(require.resolve('tap'));
+const tracePath = path.dirname(require.resolve('../trace'));
 
 module.exports = function producer(error) {
-  var stack = (error || new Error('trace')).stack.split('\n');
+  const stack = (error || new Error('trace')).stack.split('\n');
 
   return stack
     .filter(function (line) {

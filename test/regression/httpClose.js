@@ -1,8 +1,8 @@
+'use strict';
 
-
-var test = require("tap").test;
-var http = require('http');
-var produce = require('../produce.js');
+const test = require('tap').test;
+const http = require('http');
+const produce = require('../produce.js');
 
 // standart async trace modules
 require('../../trace.js');
@@ -12,8 +12,8 @@ test("test an issue with http where events wheren't removed", function test(t) {
   http.createServer(function (req, res) {
     res.end('ho away :(');
   }).listen(0, 'localhost', function listen() {
-    var self = this;
-    var addr = this.address();
+    const self = this;
+    const addr = this.address();
 
     http.get('http://localhost:' + addr.port, function get(res) {
       res.on('data', function () {});

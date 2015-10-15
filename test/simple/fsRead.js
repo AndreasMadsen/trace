@@ -1,7 +1,8 @@
+'use strict';
 
-var test = require("tap").test;
-var fs = require('fs');
-var produce = require('../produce.js');
+const test = require('tap').test;
+const fs = require('fs');
+const produce = require('../produce.js');
 
 // standart async trace modules
 require('../../trace.js');
@@ -9,7 +10,7 @@ require('../../trace.js');
 // There is no limit for the size of the stack trace
 Error.stackTraceLimit = Infinity;
 
-test("test module method (fs.readFile)", function test(t) {
+test('test module method (fs.readFile)', function test(t) {
 
   fs.readFile(__filename, function callback() {
     // NOTE: that the absolute path has been replaced with a relative path

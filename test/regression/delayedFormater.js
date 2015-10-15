@@ -1,14 +1,15 @@
+'use strict';
 
-var test = require('tap').test;
-var produce = require('../produce.js');
+const test = require('tap').test;
+const produce = require('../produce.js');
 
 // standart async trace modules
 require('../../trace.js');
 
-test("set Error.prepearStackTrace", function test(t) {
+test('set Error.prepearStackTrace', function test(t) {
   Error.prepareStackTrace = function (error, frames) {
-    var lines = [ error.toString() ];
-    for (var i = 0; i < frames.length; i++) {
+    const lines = [ error.toString() ];
+    for (let i = 0; i < frames.length; i++) {
       lines.push('    at-hack ' + frames[i].toString());
     }
     return lines.join('\n');

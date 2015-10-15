@@ -1,6 +1,7 @@
+'use strict';
 
-var test = require("tap").test;
-var produce = require('../produce.js');
+const test = require('tap').test;
+const produce = require('../produce.js');
 
 // standart async trace modules
 require('../../trace.js');
@@ -8,7 +9,7 @@ require('../../trace.js');
 // There is no limit for the size of the stack trace
 Error.stackTraceLimit = Infinity;
 
-test("test process method (nextTick)", function test(t) {
+test('test process method (nextTick)', function test(t) {
 
   // some async command
   process.nextTick(function callback() {
