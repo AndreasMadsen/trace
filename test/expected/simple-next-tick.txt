@@ -1,0 +1,19 @@
+/scripts/simple-next-tick.js:9
+  throw new Error('trace');
+  ^
+
+Error: trace
+    at callback (/scripts/simple-next-tick.js:9:9)
+    at doNTCallback0 (node.js:417:9)
+    at process._tickCallback (node.js:346:13)
+    at Function.Module.runMain (module.js:459:11)
+    at startup (node.js:134:18)
+    at node.js:961:3
+    at Object.<anonymous> (/scripts/simple-next-tick.js:8:9)
+    at Module._compile (module.js:425:26)
+    at Object.Module._extensions..js (module.js:432:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:311:12)
+    at Function.Module.runMain (module.js:457:10)
+    at startup (node.js:134:18)
+    at node.js:961:3
