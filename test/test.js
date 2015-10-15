@@ -21,9 +21,24 @@ interpreted({
       if (err) return callback(err);
       callback(null, simplify(output.toString('ascii')));
     }));
+  },
+
+  types: {
+    'txt': {
+      test: function (t, actual, expected) {
+        t.strictEqual(stripPosInfo(actual), stripPosInfo(expected));
+      },
+      update: function (actual) {
+        return actual;
+      }
+    }
   }
 });
 
 function simplify(output) {
   return output.split(__dirname).join('');
+}
+
+function stripPosInfo(text) {
+  return text.replace(/:[0-9]+:[0-9]+/g, ':r:c');
 }
