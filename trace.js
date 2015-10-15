@@ -1,48 +1,45 @@
+'use strict';
 
-var chain = require('stack-chain');
-
-var tracing, tracingFilepath;
-try {
-  tracing = require('tracing');
-} catch (e) {
-  tracing = require('./tracing_polyfill.js');
-  tracingFilepath = require.resolve('./tracing_polyfill.js');
-}
+const chain = require('stack-chain');
+const asyncWrap = require('./async_wrap.js');
+const providers = process.binding('async_wrap').Providers;
+const asyncWrapFilepath = require.resolve('./async_wrap.js');
 
 // Contains the call site objects of all the prevouse ticks leading
 // up to this one
-var callSitesForPreviuseTicks = null;
+let callSitesForPreviuseTicks = null;
 
+//
+// Mainiputlate stack trace
+//
 // add currentTrace to the callSite array
 chain.extend.attach(function (error, frames) {
   frames.push.apply(frames, callSitesForPreviuseTicks);
   return frames;
 });
-
-if (tracingFilepath) {
-  chain.filter.attach(function (error, frames) {
-    return frames.filter(function (callSite) {
-      return callSite.getFileName() !== tracingFilepath;
-    });
+// remove call sites caused by monkey patched functions
+chain.filter.attach(function (error, frames) {
+  return frames.filter(function (callSite) {
+    return callSite.getFileName() !== asyncWrapFilepath;
   });
-}
-
-// Setup an async listener with the handlers listed below
-tracing.addAsyncListener({
-  'create': asyncFunctionInitialized,
-  'before': asyncCallbackBefore,
-  'error': asyncCallbackError,
-  'after': asyncCallbackAfter
 });
 
-function asyncFunctionInitialized() {
+//
+// Track handle objects
+//
+asyncWrap.setup(asyncInit, asyncBefore, asyncAfter);
+
+function asyncInit(provider, parent) {
+  if (provider === providers.TIMERWRAP) {
+    this._traceIgnore = true;
+    return;
+  }
+
   // Capture the callSites for this tick
-  // .slice(2) removes first this file and then process.runAsyncQueue from the
-  // callSites array. Both of those only exists because of this module.
-  var trace = chain.callSite({ extend: false, filter: true, slice: 2 });
+  const trace = asyncWrap.stackTrace(2);
 
   // Add all the callSites from previuse ticks
-  trace.push.apply(trace, callSitesForPreviuseTicks);
+  trace.push.apply(trace, parent ? parent._traceState : callSitesForPreviuseTicks);
 
   // Cut the trace so it don't contain callSites there won't be shown anyway
   // because of Error.stackTraceLimit
@@ -50,16 +47,31 @@ function asyncFunctionInitialized() {
 
   // `trace` now contains callSites from this ticks and all the ticks leading
   // up to this event in time
-  return trace;
+  this._traceState = trace;
 }
 
-function asyncCallbackBefore(context, trace) {
+function asyncBefore() {
+  if (this._traceIgnore) return;
+
   // restore previuseTicks for this specific async action, thereby allowing it
   // to become a part of a error `stack` string
-  callSitesForPreviuseTicks = trace;
+  callSitesForPreviuseTicks = this._traceState;
 }
 
-function asyncCallbackError(trace, error) {
+function asyncAfter() {
+  if (this._traceIgnore) return;
+
+  // clear `callSitesForPreviuseTicks`. In some cases the such as Promises the
+  // handle context is lost. So to prevent callSites leaking into the wrong
+  // stack trace, clear `callSitesForPreviuseTicks` here.
+  callSitesForPreviuseTicks = null;
+}
+
+//
+// Intercept throws
+//
+const oldFatalException = process._fatalException;
+process._fatalException = function (error) {
   // Ensure that the error `stack` string is constructed before the
   // `callSitesForPreviuseTicks` is cleared.
   // The construction logic is defined in
@@ -67,15 +79,6 @@ function asyncCallbackError(trace, error) {
   // and in the stack-chain module invoked earlier in this file
   error.stack;
 
-  // clear previuseTicks
-  callSitesForPreviuseTicks = null;
-}
-
-function asyncCallbackAfter(context, trace) {
-  // clear `callSitesForPreviuseTicks`. This allows for other async actions
-  // to get there very own trace stack and helps in preventing a trace stack to
-  // get attach to an error `stack` string, in the unknown case where
-  // asyncCallbackBefore wasn't invoked.
-  // (This is an unseen event since trace v1.0.0)
-  callSitesForPreviuseTicks = null;
-}
+  // Allow error to propergate
+  return oldFatalException.call(process, error);
+};

@@ -2,17 +2,16 @@
 
 > Creates super long stack traces
 
-With the help of `AsyncListener` and [stack-chain](https://github.com/AndreasMadsen/stack-chain) this
-module will provide stack traces there goes beyond the current tick or turn.
+**Only works on node.js 0.12, node.js 4 and newer.**
+
+With the help of `async_wrap` and [stack-chain](https://github.com/AndreasMadsen/stack-chain)
+this module will provide stack traces there goes beyond the current tick or turn.
 
 ## Installation
 
 ```sheel
 npm install trace
 ```
-
-Since version `1.0.0` trace has been rewriten for node 0.11.12 and above, for
-previuse node versions use version `0.2.1` of trace.
 
 ## Found a bug?
 
@@ -124,7 +123,3 @@ flag.
 
 This is the max depth of the stack trace, by default it is `10`, but it can
 be se to any number or `Infinity`.
-
-### Error.captureStackTrace
-
-Not implemented, sugestions are much appreciated
