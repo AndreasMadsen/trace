@@ -2,7 +2,7 @@
 
 > Creates super long stack traces
 
-**Only works on node.js 0.12, node.js 4 and newer.**
+**Only works on node.js 4 and newer.**
 
 With the help of `async_wrap` and [stack-chain](https://github.com/AndreasMadsen/stack-chain)
 this module will provide stack traces there goes beyond the current tick or turn.
