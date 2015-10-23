@@ -39,7 +39,7 @@ AsyncWrap.prototype.wrap = function (object, name, Constructor) {
       callback.apply(null, arguments);
       if (enabled) self.after.call(handle);
     };
-    old.apply(object, args);
+    return old.apply(object, args);
   };
 }
 
