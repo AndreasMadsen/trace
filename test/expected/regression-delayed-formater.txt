@@ -4,10 +4,10 @@ throw new Error('trace');
 
 Error: trace
     at-hack Object.<anonymous> (/scripts/regression-delayed-formater.js:18:7)
-    at-hack Module._compile (module.js:425:26)
-    at-hack Object.Module._extensions..js (module.js:432:10)
-    at-hack Module.load (module.js:356:32)
-    at-hack Function.Module._load (module.js:311:12)
-    at-hack Function.Module.runMain (module.js:457:10)
-    at-hack startup (node.js:134:18)
-    at-hack node.js:961:3
+    at-hack Module._compile (module.js:399:26)
+    at-hack Object.Module._extensions..js (module.js:406:10)
+    at-hack Module.load (module.js:345:32)
+    at-hack Function.Module._load (module.js:302:12)
+    at-hack Function.Module.runMain (module.js:431:10)
+    at-hack startup (node.js:141:18)
+    at-hack node.js:977:3

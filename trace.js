@@ -29,7 +29,7 @@ chain.filter.attach(function (error, frames) {
 //
 asyncWrap.setup(asyncInit, asyncBefore, asyncAfter);
 
-function asyncInit(provider, parent) {
+function asyncInit(provider, id, parent) {
   if (provider === providers.TIMERWRAP) {
     this._traceIgnore = true;
     return;
