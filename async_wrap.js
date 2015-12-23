@@ -18,17 +18,21 @@ function ImmediateWrap() {}
 function TimeoutWrap() {}
 function InvervalWrap() {}
 
+let counter = 0;
+
 AsyncWrap.prototype.wrap = function (object, name, Constructor) {
   const self = this;
   const old = object[name];
   object[name] = function () {
     const enabled = self.enabled;
     const handle = new Constructor();
+    let id = 0;
 
     if (enabled) {
+      id = --counter;
       // TODO: setTimout leaks a call site, is chain.filter the only way?
       self.skip += 1;
-      self.init.call(handle, 0, null);
+      self.init.call(handle, 0, id, null);
       self.skip -= 1;
     }
 
@@ -37,18 +41,22 @@ AsyncWrap.prototype.wrap = function (object, name, Constructor) {
     args[0] = function () {
       if (enabled) self.before.call(handle);
       callback.apply(null, arguments);
-      if (enabled) self.after.call(handle);
+      if (enabled) {
+        self.after.call(handle);
+        self.destroy.call(null, id);
+      }
     };
     return old.apply(object, args);
   };
-}
+};
 
-AsyncWrap.prototype.setup = function (init, before, after) {
+AsyncWrap.prototype.setup = function (init, before, after, destroy) {
   this.init = init;
   this.before = before;
   this.after = after;
+  this.destroy = destroy;
 
-  asyncWrap.setupHooks(init, before, after);
+  asyncWrap.setupHooks(init, before, after, destroy);
 
   // Overwrite methods that async_wrap don't handle properly
   this.wrap(process, 'nextTick', NextTickWrap);

@@ -8,6 +8,7 @@ const asyncWrapFilepath = require.resolve('./async_wrap.js');
 // Contains the call site objects of all the prevouse ticks leading
 // up to this one
 let callSitesForPreviuseTicks = null;
+const stacks = new Map();
 
 //
 // Mainiputlate stack trace
@@ -27,7 +28,7 @@ chain.filter.attach(function (error, frames) {
 //
 // Track handle objects
 //
-asyncWrap.setup(asyncInit, asyncBefore, asyncAfter);
+asyncWrap.setup(asyncInit, asyncBefore, asyncAfter, asyncDestroy);
 
 function asyncInit(provider, id, parent) {
   if (provider === providers.TIMERWRAP) {
@@ -39,7 +40,7 @@ function asyncInit(provider, id, parent) {
   const trace = asyncWrap.stackTrace(2);
 
   // Add all the callSites from previuse ticks
-  trace.push.apply(trace, parent ? parent._traceState : callSitesForPreviuseTicks);
+  trace.push.apply(trace, parent ? stacks.get(parent._traceStackId) : callSitesForPreviuseTicks);
 
   // Cut the trace so it don't contain callSites there won't be shown anyway
   // because of Error.stackTraceLimit
@@ -47,7 +48,8 @@ function asyncInit(provider, id, parent) {
 
   // `trace` now contains callSites from this ticks and all the ticks leading
   // up to this event in time
-  this._traceState = trace;
+  this._traceStackId = id;
+  stacks.set(id, trace);
 }
 
 function asyncBefore() {
@@ -55,7 +57,7 @@ function asyncBefore() {
 
   // restore previuseTicks for this specific async action, thereby allowing it
   // to become a part of a error `stack` string
-  callSitesForPreviuseTicks = this._traceState;
+  callSitesForPreviuseTicks = stacks.get(this._traceStackId);
 }
 
 function asyncAfter() {
@@ -65,6 +67,10 @@ function asyncAfter() {
   // handle context is lost. So to prevent callSites leaking into the wrong
   // stack trace, clear `callSitesForPreviuseTicks` here.
   callSitesForPreviuseTicks = null;
+}
+
+function asyncDestroy(id) {
+  stacks.delete(id);
 }
 
 //
