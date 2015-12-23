@@ -2,7 +2,7 @@
 
 const tracker = require('./memory.js');
 const fs = require('fs');
-require('../trace');
+require('../trace.js');
 
 tracker.start();
 
