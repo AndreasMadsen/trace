@@ -1,9 +1,7 @@
 'use strict';
 
 const chain = require('stack-chain');
-const asyncWrap = require('./async_wrap.js');
-const providers = process.binding('async_wrap').Providers;
-const asyncWrapFilepath = require.resolve('./async_wrap.js');
+const asyncHook = require('async-hook');
 
 // Contains the call site objects of all the prevouse ticks leading
 // up to this one
@@ -18,29 +16,37 @@ chain.extend.attach(function (error, frames) {
   frames.push.apply(frames, callSitesForPreviuseTicks);
   return frames;
 });
-// remove call sites caused by monkey patched functions
-chain.filter.attach(function (error, frames) {
-  return frames.filter(function (callSite) {
-    return callSite.getFileName() !== asyncWrapFilepath;
-  });
-});
 
 //
 // Track handle objects
 //
-asyncWrap.setup(asyncInit, asyncBefore, asyncAfter, asyncDestroy);
+asyncHook.addHooks({
+  init: asyncInit,
+  pre: asyncBefore,
+  post: asyncAfter,
+  destroy: asyncDestroy
+});
+asyncHook.enable();
 
-function asyncInit(provider, id, parent) {
-  if (provider === providers.TIMERWRAP) {
-    this._traceIgnore = true;
-    return;
-  }
+function getCallSites(skip) {
+  const limit = Error.stackTraceLimit;
 
-  // Capture the callSites for this tick
-  const trace = asyncWrap.stackTrace(2);
+  Error.stackTraceLimit = limit + skip;
+  const stack = chain.callSite({
+    extend: false,
+    filter: true,
+    slice: skip
+  });
+  Error.stackTraceLimit = limit;
+
+  return stack;
+}
+
+function asyncInit(uid, handle, provider, parentUid) {
+  const trace = getCallSites(2);
 
   // Add all the callSites from previuse ticks
-  trace.push.apply(trace, parent ? stacks.get(parent._traceStackId) : callSitesForPreviuseTicks);
+  trace.push.apply(trace, parentUid === null ? callSitesForPreviuseTicks : stacks.get(parentUid));
 
   // Cut the trace so it don't contain callSites there won't be shown anyway
   // because of Error.stackTraceLimit
@@ -48,29 +54,24 @@ function asyncInit(provider, id, parent) {
 
   // `trace` now contains callSites from this ticks and all the ticks leading
   // up to this event in time
-  this._traceStackId = id;
-  stacks.set(id, trace);
+  stacks.set(uid, trace);
 }
 
-function asyncBefore() {
-  if (this._traceIgnore) return;
-
+function asyncBefore(uid) {
   // restore previuseTicks for this specific async action, thereby allowing it
   // to become a part of a error `stack` string
-  callSitesForPreviuseTicks = stacks.get(this._traceStackId);
+  callSitesForPreviuseTicks = stacks.get(uid);
 }
 
-function asyncAfter() {
-  if (this._traceIgnore) return;
-
+function asyncAfter(uid) {
   // clear `callSitesForPreviuseTicks`. In some cases the such as Promises the
   // handle context is lost. So to prevent callSites leaking into the wrong
   // stack trace, clear `callSitesForPreviuseTicks` here.
   callSitesForPreviuseTicks = null;
 }
 
-function asyncDestroy(id) {
-  stacks.delete(id);
+function asyncDestroy(uid) {
+  stacks.delete(uid);
 }
 
 //
