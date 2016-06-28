@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'Latin Modern Mono';
+    src: url('lmmono10-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Latin Modern Roman';
+    src: url('lmroman10-bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Latin Modern Roman';
+    src: url('lmroman10-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+}
+
+@font-face {
+    font-family: 'Latin Modern Caps';
+    src: url('lmromancaps10-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

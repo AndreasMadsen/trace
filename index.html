@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Trace - Creates super long stack traces</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="fonts/import.css"></link>
+  <link rel="stylesheet" href="normalize.css"></link>
+  <link rel="stylesheet" href="style.css"></link>
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Trace</h1>
+    <ul id="navigration">
+      <li data-show="examples" class="selected">Examples</li>
+      <li data-show="documentation">Documentation</li>
+      <li data-show="FAQ">FAQ</li>
+    </ul>
+  </header>
+
+  <section id="examples">
+    <h2>Examples</h2>
+
+    <article id="form">
+      <ul id="file-selection">
+        <li data-show="basic.js" class="selected">basic.js</li>
+        <li data-show="timers.js">timers.js</li>
+        <li data-show="http.js">http.js</li>
+      </ul>
+
+      <ul id="tool-selection">
+        <li><input type="checkbox" id="trace-enabled" checked> trace</li>
+        <li><input type="checkbox" id="clarify-enabled" checked> clarify</li>
+      </ul>
+    </article>
+
+    <!-- START OF COPY & PAST -->
+    <code class="content" data-file="basic.js">
+    <span class="keyword">const</span> crypto = <span class="function">require</span>(<span class="string">'crypto'</span>);
+    <span class="keyword">const</span> fs = <span class="function">require</span>(<span class="string">'fs'</span>);
+
+    fs.<span class="function">readFile</span>(__filename, <span class="keyword">function</span> () {
+      crypto.<span class="function">randomBytes</span>(<span class="number">256</span>, <span class="keyword">function</span> () {
+        process.<span class="function">nextTick</span>(<span class="keyword">function</span> () {
+          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'custom error'</span>);
+        });
+      });
+    });
+    </code>
+
+    <code class="content" data-file="timers.js" hidden>
+    <span class="keyword">function</span> <span class="function">bad</span>() {
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'custom error'</span>);
+    }
+
+    <span class="function">setTimeout</span>(bad, <span class="number">10</span>);
+    <span class="function">setTimeout</span>(bad, <span class="number">20</span>);
+    </code>
+
+    <code class="content" data-file="http.js" hidden>
+    <span class="keyword">const</span> http = <span class="function">require</span>(<span class="string">'http'</span>);
+
+    http.<span class="function">createServer</span>(<span class="keyword">function</span> () {
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'custom error'</span>);
+    }).<span class="function">listen</span>(<span class="number">1337</span>, <span class="keyword">function</span> () {
+      http.<span class="function">get</span>(<span class="string">'http://localhost:<span class="number">1337</span>'</span>);
+    });
+    </code>
+
+    <code id="command">$ node --stack_trace_limit=100 -r trace -r clarify wired.js</code>
+
+    <code class="output" data-file="basic.js" hidden>
+    /trace/showcases/basic.js:7
+          throw new Error('custom error');
+          ^
+
+    Error: custom error
+        at /trace/showcases/basic.js:7:13
+        at _combinedTickCallback (internal/process/next_tick.js:67:7)
+        at process._tickCallback (internal/process/next_tick.js:98:9)
+    </code>
+
+    <code class="output" data-file="basic.js" data-trace hidden>
+    /trace/showcases/basic.js:7
+          throw new Error('custom error');
+          ^
+
+    Error: custom error
+        at /trace/showcases/basic.js:7:13
+        at _combinedTickCallback (internal/process/next_tick.js:67:7)
+        at process._tickCallback (internal/process/next_tick.js:98:9)
+        at InternalFieldObject.ondone (/trace/showcases/basic.js:6:13)
+        at /trace/showcases/basic.js:5:10
+        at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:445:3)
+        at ReadFileContext.close (fs.js:358:11)
+        at FSReqWrap.readFileAfterRead [as oncomplete] (fs.js:414:15)
+        at ReadFileContext.read (fs.js:342:11)
+        at FSReqWrap.readFileAfterStat [as oncomplete] (fs.js:398:11)
+        at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:374:11)
+        at Object.fs.readFile (fs.js:303:11)
+        at Object.&lt;anonymous&gt; (/trace/showcases/basic.js:4:4)
+        at Module._compile (module.js:541:32)
+        at Object.Module._extensions..js (module.js:550:10)
+        at Module.load (module.js:458:32)
+        at tryModuleLoad (module.js:417:12)
+        at Function.Module._load (module.js:409:3)
+        at Module.runMain (module.js:575:10)
+        at run (bootstrap_node.js:340:7)
+        at startup (bootstrap_node.js:132:9)
+        at bootstrap_node.js:455:3
+    </code>
+
+    <code class="output" data-file="basic.js" data-clarify hidden>
+    /trace/showcases/basic.js:7
+          throw new Error('custom error');
+          ^
+
+    Error: custom error
+        at /trace/showcases/basic.js:7:13
+        at _combinedTickCallback (internal/process/next_tick.js:67:7)
+        at process._tickCallback (internal/process/next_tick.js:98:9)
+    </code>
+
+    <code class="output" data-file="basic.js" data-trace data-clarify>
+    /trace/showcases/basic.js:7
+          throw new Error('custom error');
+          ^
+
+    Error: custom error
+        at /trace/showcases/basic.js:7:13
+        at _combinedTickCallback (internal/process/next_tick.js:67:7)
+        at process._tickCallback (internal/process/next_tick.js:98:9)
+        at InternalFieldObject.ondone (/trace/showcases/basic.js:6:13)
+        at /trace/showcases/basic.js:5:10
+        at Object.&lt;anonymous&gt; (/trace/showcases/basic.js:4:4)
+    </code>
+
+    <code class="output" data-file="timers.js" hidden>
+    /trace/showcases/timers.js:2
+      throw new Error('custom error');
+      ^
+
+    Error: custom error
+        at Timeout.bad [as _onTimeout] (/trace/showcases/timers.js:2:9)
+        at tryOnTimeout (timers.js:224:11)
+        at Timer.listOnTimeout (timers.js:198:5)
+    </code>
+
+    <code class="output" data-file="timers.js" data-trace hidden>
+    /trace/showcases/timers.js:2
+      throw new Error('custom error');
+      ^
+
+    Error: custom error
+        at Timeout.bad (/trace/showcases/timers.js:2:9)
+        at tryOnTimeout (timers.js:224:11)
+        at Timer.listOnTimeout (timers.js:198:5)
+        at Object.&lt;anonymous&gt; (/trace/showcases/timers.js:5:1)
+        at Module._compile (module.js:541:32)
+        at Object.Module._extensions..js (module.js:550:10)
+        at Module.load (module.js:458:32)
+        at tryModuleLoad (module.js:417:12)
+        at Function.Module._load (module.js:409:3)
+        at Module.runMain (module.js:575:10)
+        at run (bootstrap_node.js:340:7)
+        at startup (bootstrap_node.js:132:9)
+        at bootstrap_node.js:455:3
+    </code>
+
+    <code class="output" data-file="timers.js" data-clarify hidden>
+    /trace/showcases/timers.js:2
+      throw new Error('custom error');
+      ^
+
+    Error: custom error
+        at Timeout.bad [as _onTimeout] (/trace/showcases/timers.js:2:9)
+    </code>
+
+    <code class="output" data-file="timers.js" data-trace data-clarify hidden>
+    /trace/showcases/timers.js:2
+      throw new Error('custom error');
+      ^
+
+    Error: custom error
+        at Timeout.bad (/trace/showcases/timers.js:2:9)
+        at Object.&lt;anonymous&gt; (/trace/showcases/timers.js:5:1)
+    </code>
+
+    <code class="output" data-file="http.js" hidden>
+    /trace/showcases/http.js:4
+      throw new Error('custom error');
+      ^
+
+    Error: custom error
+        at Server.&lt;anonymous&gt; (/trace/showcases/http.js:4:9)
+        at emitTwo (events.js:106:13)
+        at Server.emit (events.js:191:7)
+        at HTTPParser.parserOnIncoming [as onIncoming] (_http_server.js:543:12)
+        at HTTPParser.parserOnHeadersComplete (_http_common.js:105:23)
+    </code>
+
+    <code class="output" data-file="http.js" data-trace hidden>
+    /trace/showcases/http.js:4
+      throw new Error('custom error');
+      ^
+
+    Error: custom error
+        at Server.&lt;anonymous&gt; (/trace/showcases/http.js:4:9)
+        at emitTwo (events.js:106:13)
+        at Server.emit (events.js:191:7)
+        at HTTPParser.parserOnIncoming [as onIncoming] (_http_server.js:543:12)
+        at HTTPParser.parserOnHeadersComplete (_http_common.js:105:23)
+        at new &lt;anonymous&gt; (_http_common.js:159:16)
+        at exports.FreeList.alloc (internal/freelist.js:14:46)
+        at Server.connectionListener (_http_server.js:316:24)
+        at emitOne (events.js:96:13)
+        at Server.emit (events.js:188:7)
+        at TCP.onconnection (net.js:1460:8)
+        at createServerHandle (net.js:1181:14)
+        at Server._listen2 (net.js:1225:14)
+        at listen (net.js:1290:10)
+        at Server.listen (net.js:1386:5)
+        at Object.&lt;anonymous&gt; (/trace/showcases/http.js:5:4)
+        at Module._compile (module.js:541:32)
+        at Object.Module._extensions..js (module.js:550:10)
+        at Module.load (module.js:458:32)
+        at tryModuleLoad (module.js:417:12)
+        at Function.Module._load (module.js:409:3)
+        at Module.runMain (module.js:575:10)
+        at run (bootstrap_node.js:340:7)
+        at startup (bootstrap_node.js:132:9)
+        at bootstrap_node.js:455:3
+    </code>
+
+    <code class="output" data-file="http.js" data-clarify hidden>
+    /trace/showcases/http.js:4
+      throw new Error('custom error');
+      ^
+
+    Error: custom error
+        at Server.&lt;anonymous&gt; (/trace/showcases/http.js:4:9)
+    </code>
+
+    <code class="output" data-file="http.js" data-trace data-clarify hidden>
+    /trace/showcases/http.js:4
+      throw new Error('custom error');
+      ^
+
+    Error: custom error
+        at Server.&lt;anonymous&gt; (/trace/showcases/http.js:4:9)
+        at exports.FreeList.alloc (internal/freelist.js:14:46)
+        at Object.&lt;anonymous&gt; (/trace/showcases/http.js:5:4)
+    </code>
+    <!-- END OF COPY & PAST -->
+  </section>
+
+  <section id="documentation" hidden>
+    <h2>Documentation</h2>
+    <p>
+    To activate <span class="tech">trace</span> simply add
+    <span class="tech">require('trace')</span> to the beginning of your program.
+    <span class="tech">clarify</span> works similarly.
+    </p>
+
+    <code class="content">
+      <span class="function">require</span>(<span class="string">'trace'</span>);
+      <span class="function">require</span>(<span class="string">'clarify'</span>);
+
+      <span class="keyword">const</span> crypto = <span class="function">require</span>(<span class="string">'crypto'</span>);
+      <span class="keyword">const</span> fs = <span class="function">require</span>(<span class="string">'fs'</span>);
+
+      fs.<span class="function">readFile</span>(__filename, <span class="keyword">function</span> () {
+        crypto.<span class="function">randomBytes</span>(<span class="number">256</span>, <span class="keyword">function</span> () {
+          process.<span class="function">nextTick</span>(<span class="keyword">function</span> () {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'custom error'</span>);
+          });
+        });
+      });
+    </code>
+
+    <p>
+    Recent node versions also supports the <span class="tech">-r</span> flag,
+    which does the same thing.
+    </p>
+
+    <h3>Error.stackTraceLimit</h3>
+    <p>
+    To set the number of lines (call sites) in the stack trace set this value.
+    This can be any number (default 10) or <span class="tech">Infinity</span>.
+    </p>
+
+    <code class="content">
+    Error.stackTraceLimit = <span class="number">100</span>
+    </code>
+
+    <p>
+    This is a build in v8 feature
+    (<a href="https://github.com/v8/v8/wiki/Stack-Trace-API">https://github.com/v8/v8/wiki/Stack-Trace-API</a>)
+    that can also be set using the <span class="tech">--stack_trace_limit=100</span>
+    flag.
+    </p>
+  </section>
+
+  <section id="FAQ" hidden>
+    <h2>FAQ</h2>
+
+    <h3>Can I use this in production?</h3>
+    <p>
+    You can in theory, but it seriously affect performance. I strongly recommend
+    against it. Trace is useful when you can reproduce a failure, but don't know
+    what lead to that failure.
+    </p>
+
+    <h3>Something doesn't work.</h3>
+    <p>
+    Please file an issue <a href="https://github.com/AndreasMadsen/trace">https://github.com/AndreasMadsen/trace</a>
+    and i will look into it. It doesn't have to be an isolated test case, but
+    it will of cause take longer for me to debug if it isn't.
+    </p>
+
+    <h3>How does it works?</h3>
+    <p>
+    Trace is build using <a href="https://github.com/nodejs/diagnostics/tree/master/tracing/AsyncWrap">AsyncWrap</a>
+    which provides information about the life of async operations (handles).
+    Using this information it can continuously collect and combine stack traces.
+    At the moment AsyncWrap is in development and has known issues, to fix these
+    I've created <a href="https://github.com/AndreasMadsen/async-hook">async-hook</a>.
+    </p>
+
+    <p>
+    To interface with the stack trace itself, I've build
+    <a href="https://github.com/AndreasMadsen/stack-chain">stack-chain</a> which
+    abstracts all of the compatibility issues. Internally it uses the
+    <a href="https://github.com/v8/v8/wiki/Stack-Trace-API">v8 stack trace API</a>.
+    </p>
+  </section>
+
+  <footer>
+    <a href="http://github.com/AndreasMadsen/trace">trace</a> and
+    <a href="http://github.com/AndreasMadsen/clarify">clarify</a> is made <body>
+    <a href="http://github.com/AndreasMadsen" rel="author">Andreas Madsen</a>.
+  </footer>
+
+  <script>
+    Array.from(document.querySelectorAll('.output, .content')).forEach((node) => {
+      const lines = node.innerHTML.split('\n').slice(1);
+      const indent = lines[0].match(/^\s+/)[0].length;
+
+      node.innerHTML = lines.map((line) => line.slice(indent)).join('\n');
+    });
+  </script>
+</body>
+</html>

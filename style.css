@@ -1,0 +1,154 @@
+
+/*
+ * font setup
+ */
+body {
+  font-family: "Latin Modern Roman";
+}
+
+h1, h2 {
+  font-family: "Latin Modern Caps";
+}
+
+h1 {
+  font-size: 28pt;
+}
+
+h2 {
+  font-size: 18pt;
+}
+
+code {
+  font-family: "Latin Modern Mono";
+  white-space: pre-wrap;
+}
+
+span.tech {
+  font-family: "Latin Modern Mono";
+}
+
+/*
+ * layout
+ */
+h1 {
+  padding-left: 30px;
+  border-bottom: 1px solid gray;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+/* menu */
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  font-weight: bold;
+
+  display: flex;
+}
+
+ul li {
+  padding: 15px 0;
+  text-align: center;
+  background: #FAFAFA;
+  border-right: 1px solid white;
+  border-bottom: 3px solid #FAFAFA;
+  flex-grow: 1;
+  cursor: pointer;
+}
+ul li:last-of-type {
+  border-right: none;
+}
+
+ul li.selected {
+  background: #F0F0F0;
+  border-bottom-color: #F0F0F0;
+}
+
+ul li:hover {
+  border-bottom-color: gray;
+}
+
+/* section */
+section {
+  width: calc(100% - 40px);
+  margin: 20px auto;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  box-shadow:
+      0 0 0 2px #F0F0F0,
+      0 0 0 4px white,
+      0 0 0 6px #FAFAFA;
+}
+
+h2 {
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+/* demo */
+article#form {
+  overflow: hidden;
+}
+
+article#form ul {
+  float: left;
+  font-size: 12pt;
+  font-weight: normal;
+}
+
+article#form ul li {
+  padding: 8px;
+}
+
+ul#file-selection {
+  width: 60%;
+}
+ul#file-selection li:last-of-type {
+  border-right: 1px solid white;
+}
+
+ul#tool-selection {
+  width: 40%;
+}
+
+/* code */
+code {
+  padding: 3px 10px;
+  margin: 5px 0;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+}
+
+code.output, code.content {
+  border-left: 1px solid #F0F0F0;
+}
+
+code#command {
+  background: #FAFAFA;
+}
+
+code.content .number {
+  color: #268bd2;
+}
+
+code.content .keyword {
+  color: #cb4b16;
+}
+
+code.content .string {
+  color: #dc322f;
+}
+
+code.content .function {
+  color: #6c71c4;
+}
+
+/* footer */
+footer {
+  width: 100%;
+  padding: 0px 25px 15px 25px;
+  box-sizing: border-box;
+  color: gray;
+}
