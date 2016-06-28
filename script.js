@@ -17,11 +17,11 @@
     const fileSelector = new Menu(document.querySelector('#file-selection'));
     const toolSelector = new Menu(document.querySelector('#tool-selection'));
     const fileContent = new Content(
-      document.querySelectorAll('code.content'),
+      document.querySelectorAll('#examples code.content'),
       (code) => code.dataset.file
     );
     const outputContent = new Content(
-      document.querySelectorAll('code.output'),
+      document.querySelectorAll('#examples code.output'),
       (code) => outputId(code.dataset.file, code.dataset.trace === '', code.dataset.clarify === '')
     );
     const command = document.getElementById('command').firstChild;
