@@ -3,13 +3,16 @@
   ^
 
 Error: trace
-    at callback (/scripts/simple-timer.js:9:9)
-    at Timer.listOnTimeout (timers.js:92:15)
+    at Timeout.callback (/scripts/simple-timer.js:9:9)
+    at tryOnTimeout (timers.js:224:11)
+    at Timer.listOnTimeout (timers.js:198:5)
     at Object.<anonymous> (/scripts/simple-timer.js:8:1)
-    at Module._compile (module.js:413:34)
-    at Object.Module._extensions..js (module.js:422:10)
-    at Module.load (module.js:357:32)
-    at Function.Module._load (module.js:314:12)
-    at Function.Module.runMain (module.js:447:10)
-    at startup (node.js:141:18)
-    at node.js:933:3
+    at Module._compile (module.js:541:32)
+    at Object.Module._extensions..js (module.js:550:10)
+    at Module.load (module.js:458:32)
+    at tryModuleLoad (module.js:417:12)
+    at Function.Module._load (module.js:409:3)
+    at Module.runMain (module.js:575:10)
+    at run (bootstrap_node.js:340:7)
+    at startup (bootstrap_node.js:132:9)
+    at bootstrap_node.js:455:3
