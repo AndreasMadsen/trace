@@ -3,10 +3,10 @@
   document.addEventListener('DOMContentLoaded', main);
 
   function main () {
-    const nav = new Menu(document.querySelector('#navigration'));
-    const pages = new Content(
+    var nav = new Menu(document.querySelector('#navigration'));
+    var pages = new Content(
       document.querySelectorAll('section'),
-      (section) => section.getAttribute('id')
+      function (section) { return section.getAttribute('id'); }
     );
 
     nav.onclick = function (li) {
@@ -14,17 +14,17 @@
       pages.show(li.dataset.show);
     };
 
-    const fileSelector = new Menu(document.querySelector('#file-selection'));
-    const toolSelector = new Menu(document.querySelector('#tool-selection'));
-    const fileContent = new Content(
+    var fileSelector = new Menu(document.querySelector('#file-selection'));
+    var toolSelector = new Menu(document.querySelector('#tool-selection'));
+    var fileContent = new Content(
       document.querySelectorAll('#examples code.content'),
-      (code) => code.dataset.file
+      function (code) { return code.dataset.file; }
     );
-    const outputContent = new Content(
+    var outputContent = new Content(
       document.querySelectorAll('#examples code.output'),
-      (code) => outputId(code.dataset.file, code.dataset.trace === '', code.dataset.clarify === '')
+      function (code) { return outputId(code.dataset.file, code.dataset.trace === '', code.dataset.clarify === ''); }
     );
-    const command = document.getElementById('command').firstChild;
+    var command = document.getElementById('command').firstChild;
 
     fileSelector.onclick = function (li) {
       fileSelector.highlight(li);
@@ -32,7 +32,7 @@
       updateOutput();
     };
     toolSelector.onclick = function (li, event) {
-      const input = li.getElementsByTagName('input')[0];
+      var input = li.getElementsByTagName('input')[0];
       if (event.target.tagName !== 'INPUT') {
         input.checked = !input.checked;
       }
@@ -40,9 +40,9 @@
     };
 
     function updateOutput () {
-      const filename = fileSelector.selected.dataset.show;
-      const trace = document.getElementById('trace-enabled').checked;
-      const clarify = document.getElementById('clarify-enabled').checked;
+      var filename = fileSelector.selected.dataset.show;
+      var trace = document.getElementById('trace-enabled').checked;
+      var clarify = document.getElementById('clarify-enabled').checked;
       outputContent.show(outputId(filename, trace, clarify));
 
       command.textContent = `$ node --stack_trace_limit=100 ${trace ? '-r trace ' : ''}${clarify ? '-r clarify ' : ''}${filename}`;
@@ -54,14 +54,15 @@
   }
 
   function Content (pages, identifyer) {
+    var self = this;
     this.pages = {};
     this.selected = null;
-    for (const page of pages) {
-      this.pages[identifyer(page)] = page;
+    Array.from(pages).forEach(function (page) {
+      self.pages[identifyer(page)] = page;
       if (!page.hasAttribute('hidden')) {
-        this.selected = page;
+        self.selected = page;
       }
-    }
+    });
   }
   Content.prototype.show = function (id) {
     this.selected.setAttribute('hidden', '');
@@ -70,18 +71,19 @@
   };
 
   function Menu (node) {
+    var self = this;
     this.element = node;
     this.selected = null;
 
-    for (const li of this.element.getElementsByTagName('li')) {
+    Array.from(node.getElementsByTagName('li')).forEach(function (li) {
       if (li.classList.contains('selected')) {
-        this.selected = li;
+        self.selected = li;
       }
 
-      li.addEventListener('click', (e) => {
-        if (this.onclick) this.onclick(li, e);
+      li.addEventListener('click', function (e) {
+        if (self.onclick) self.onclick(li, e);
       }, false);
-    }
+    });
   }
 
   Menu.prototype.highlight = function (select) {

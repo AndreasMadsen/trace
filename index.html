@@ -337,11 +337,13 @@
   </footer>
 
   <script>
-    Array.from(document.querySelectorAll('.output, .content')).forEach((node) => {
-      const lines = node.innerHTML.split('\n').slice(1);
-      const indent = lines[0].match(/^\s+/)[0].length;
+    Array.from(document.querySelectorAll('.output, .content')).forEach(function (node) {
+      var lines = node.innerHTML.split('\n').slice(1);
+      var indent = lines[0].match(/^\s+/)[0].length;
 
-      node.innerHTML = lines.map((line) => line.slice(indent)).join('\n');
+      node.innerHTML = lines.map(function (line) {
+        return line.slice(indent);
+      }).join('\n');
     });
   </script>
 </body>
