@@ -1,7 +1,7 @@
 {
   "name": "trace",
   "description": "Creates super long stack traces",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "main": "./trace.js",
   "scripts": {
@@ -33,6 +33,6 @@
   },
   "license": "MIT",
   "engines": {
-    "node": "^4.2.5 || ^6.0"
+    "node": "^4.5 || ^6.0"
   }
 }
