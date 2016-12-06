@@ -29,7 +29,7 @@
     "endpoint": "^0.4.0",
     "clarify": "^2.0.0",
     "summary": "^0.3.0",
-    "tap": "^5.8.0"
+    "tap": "^8.0.1"
   },
   "license": "MIT",
   "engines": {
