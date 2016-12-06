@@ -78,19 +78,3 @@ function asyncAfter(uid) {
 function asyncDestroy(uid) {
   traces.delete(uid);
 }
-
-//
-// Intercept throws
-//
-const oldFatalException = process._fatalException;
-process._fatalException = function (error) {
-  // Ensure that the error `stack` string is constructed before the
-  // `callSitesForPreviuseTicks` is cleared.
-  // The construction logic is defined in
-  //  - https://github.com/v8/v8/blob/master/src/messages.js -> captureStackTrace
-  // and in the stack-chain module invoked earlier in this file
-  error.stack;
-
-  // Allow error to propergate
-  return oldFatalException.call(process, error);
-};
