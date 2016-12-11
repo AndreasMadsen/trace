@@ -2,7 +2,7 @@
 
 > Creates super long stack traces
 
-See http://andreasmadsen.github.io/trace/ for examples.
+See https://trace.js.org for examples.
 
 **Trace only works with node.js v4 and newer.**
 
@@ -23,7 +23,7 @@ npm install clarify
 node --stack_trace_limit=100 -r trace -r clarify debug-me.js
 ```
 
-For specific examples see http://andreasmadsen.github.io/trace/.
+For specific examples see https://trace.js.org.
 
 ## Found a bug?
 
