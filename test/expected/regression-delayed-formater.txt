@@ -1,15 +1,16 @@
+warning: you are using async-hook which is unstable.
 /scripts/regression-delayed-formater.js:18
 throw new Error('trace');
 ^
 
 Error: trace
     at-hack Object.<anonymous> (/scripts/regression-delayed-formater.js:18:7)
-    at-hack Module._compile (module.js:541:32)
-    at-hack Object.Module._extensions..js (module.js:550:10)
-    at-hack Module.load (module.js:458:32)
-    at-hack tryModuleLoad (module.js:417:12)
-    at-hack Function.Module._load (module.js:409:3)
-    at-hack Module.runMain (module.js:575:10)
-    at-hack run (bootstrap_node.js:340:7)
-    at-hack startup (bootstrap_node.js:132:9)
-    at-hack bootstrap_node.js:455:3
+    at-hack Module._compile (module.js:571:32)
+    at-hack Object.Module._extensions..js (module.js:580:10)
+    at-hack Module.load (module.js:488:32)
+    at-hack tryModuleLoad (module.js:447:12)
+    at-hack Function.Module._load (module.js:439:3)
+    at-hack Module.runMain (module.js:605:10)
+    at-hack run (bootstrap_node.js:420:7)
+    at-hack startup (bootstrap_node.js:139:9)
+    at-hack bootstrap_node.js:535:3
