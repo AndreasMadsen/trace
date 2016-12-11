@@ -1,3 +1,4 @@
+warning: you are using async-hook which is unstable.
 /scripts/regression-net-socket.js:7
   throw new Error('trace');
   ^
@@ -6,23 +7,23 @@ Error: trace
     at Server.<anonymous> (/scripts/regression-net-socket.js:7:9)
     at emitOne (events.js:96:13)
     at Server.emit (events.js:188:7)
-    at TCP.onconnection (net.js:1460:8)
-    at createServerHandle (net.js:1181:14)
-    at Server._listen2 (net.js:1238:14)
-    at listen (net.js:1290:10)
-    at net.js:1400:9
-    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:65:16)
-    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:84:10)
-    at Object.lookup (dns.js:167:19)
-    at listenAfterLookup (net.js:1395:20)
-    at Server.listen (net.js:1391:5)
+    at TCP.onconnection (net.js:1454:8)
+    at createServerHandle (net.js:1189:14)
+    at Server._listen2 (net.js:1246:14)
+    at listen (net.js:1298:10)
+    at doListening (net.js:1397:7)
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:62:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:81:10)
+    at Object.lookup (dns.js:164:19)
+    at lookupAndListen (net.js:1392:18)
+    at Server.listen (net.js:1373:9)
     at Object.<anonymous> (/scripts/regression-net-socket.js:10:8)
-    at Module._compile (module.js:541:32)
-    at Object.Module._extensions..js (module.js:550:10)
-    at Module.load (module.js:458:32)
-    at tryModuleLoad (module.js:417:12)
-    at Function.Module._load (module.js:409:3)
-    at Module.runMain (module.js:575:10)
-    at run (bootstrap_node.js:340:7)
-    at startup (bootstrap_node.js:132:9)
-    at bootstrap_node.js:455:3
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32)
+    at tryModuleLoad (module.js:447:12)
+    at Function.Module._load (module.js:439:3)
+    at Module.runMain (module.js:605:10)
+    at run (bootstrap_node.js:420:7)
+    at startup (bootstrap_node.js:139:9)
+    at bootstrap_node.js:535:3

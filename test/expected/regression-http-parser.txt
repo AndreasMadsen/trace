@@ -1,0 +1,43 @@
+warning: you are using async-hook which is unstable.
+/scripts/regression-http-parser.js:26
+      throw new Error('trace');
+      ^
+
+Error: trace
+    at Socket.res.socket._read (/scripts/regression-http-parser.js:26:13)
+    at Socket.Readable.read (_stream_readable.js:348:10)
+    at readableAddChunk (_stream_readable.js:177:18)
+    at Socket.Readable.push (_stream_readable.js:134:10)
+    at TCP.onread (net.js:551:20)
+    at Socket.connect (net.js:923:40)
+    at Agent.exports.connect.exports.createConnection (net.js:74:35)
+    at Agent.createSocket (_http_agent.js:195:26)
+    at Agent.addRequest (_http_agent.js:157:10)
+    at new ClientRequest (_http_client.js:163:16)
+    at Object.request (http.js:26:10)
+    at Object.get (http.js:30:21)
+    at Server.<anonymous> (/scripts/regression-http-parser.js:17:8)
+    at Server.g (events.js:292:16)
+    at emitNone (events.js:86:13)
+    at Server.emit (events.js:185:7)
+    at emitListeningNT (net.js:1288:10)
+    at _combinedTickCallback (internal/process/next_tick.js:71:11)
+    at process._tickCallback (internal/process/next_tick.js:98:9)
+    at Server._listen2 (net.js:1276:11)
+    at listen (net.js:1298:10)
+    at doListening (net.js:1397:7)
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:62:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:81:10)
+    at Object.lookup (dns.js:164:19)
+    at lookupAndListen (net.js:1392:18)
+    at Server.listen (net.js:1373:9)
+    at Object.<anonymous> (/scripts/regression-http-parser.js:15:8)
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32)
+    at tryModuleLoad (module.js:447:12)
+    at Function.Module._load (module.js:439:3)
+    at Module.runMain (module.js:605:10)
+    at run (bootstrap_node.js:420:7)
+    at startup (bootstrap_node.js:139:9)
+    at bootstrap_node.js:535:3
