@@ -6,8 +6,6 @@ See https://trace.js.org for examples.
 
 **Trace only works with node.js v4 and newer.**
 
-**Know issue:** Some are expericing issues in node.js v6.4 and v7. We are currently investigating, follow progress at: https://github.com/nodejs/node/issues/8216
-
 ## How
 
 ```sheel
