@@ -1,4 +1,4 @@
-#trace [![Build Status](https://secure.travis-ci.org/AndreasMadsen/trace.png)](http://travis-ci.org/AndreasMadsen/trace)
+# trace [![Build Status](https://secure.travis-ci.org/AndreasMadsen/trace.svg)](http://travis-ci.org/AndreasMadsen/trace)
 
 > Creates super long stack traces
 
@@ -9,7 +9,7 @@ See https://trace.js.org for examples.
 ## How
 
 ```sheel
-npm install trace
+npm install trace --save
 node --stack_trace_limit=100 -r trace debug-me.js
 ```
 
@@ -17,7 +17,7 @@ This will provide a very long stack trace, if you are not interested in
 node internal lines, take a look at [clarify](https://github.com/AndreasMadsen/clarify).
 
 ```sheel
-npm install clarify
+npm install clarify --save
 node --stack_trace_limit=100 -r trace -r clarify debug-me.js
 ```
 
