@@ -4,7 +4,8 @@
 
 See https://trace.js.org for examples.
 
-**Trace only works with node.js v4 and newer.**
+**Trace only works with node.js v8.x and newer.** Use `npm install trace@^2`
+for node.js v6 and v4.
 
 ## How
 

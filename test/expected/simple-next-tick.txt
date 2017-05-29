@@ -1,23 +1,22 @@
-warning: you are using async-hook which is unstable.
 /scripts/simple-next-tick.js:9
   throw new Error('trace');
   ^
 
 Error: trace
     at callback (/scripts/simple-next-tick.js:9:9)
-    at _combinedTickCallback (internal/process/next_tick.js:67:7)
-    at process._tickCallback (internal/process/next_tick.js:98:9)
-    at Module.runMain (module.js:607:11)
-    at run (bootstrap_node.js:420:7)
-    at startup (bootstrap_node.js:139:9)
-    at bootstrap_node.js:535:3
+    at _combinedTickCallback (internal/process/next_tick.js:95:7)
+    at process._tickCallback (internal/process/next_tick.js:161:9)
+    at Function.Module.runMain (module.js:607:11)
+    at startup (bootstrap_node.js:158:16)
+    at bootstrap_node.js:575:3
+    at setupInit (internal/process/next_tick.js:225:7)
+    at process.nextTick (internal/process/next_tick.js:247:5)
     at Object.<anonymous> (/scripts/simple-next-tick.js:8:9)
-    at Module._compile (module.js:571:32)
+    at Module._compile (module.js:569:30)
     at Object.Module._extensions..js (module.js:580:10)
-    at Module.load (module.js:488:32)
-    at tryModuleLoad (module.js:447:12)
-    at Function.Module._load (module.js:439:3)
-    at Module.runMain (module.js:605:10)
-    at run (bootstrap_node.js:420:7)
-    at startup (bootstrap_node.js:139:9)
-    at bootstrap_node.js:535:3
+    at Module.load (module.js:503:32)
+    at tryModuleLoad (module.js:466:12)
+    at Function.Module._load (module.js:458:3)
+    at Function.Module.runMain (module.js:605:10)
+    at startup (bootstrap_node.js:158:16)
+    at bootstrap_node.js:575:3

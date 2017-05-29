@@ -1,24 +1,22 @@
-warning: you are using async-hook which is unstable.
 /scripts/simple-fs-read.js:11
   throw new Error('trace');
   ^
 
 Error: trace
     at callback (/scripts/simple-fs-read.js:11:9)
-    at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:415:3)
-    at ReadFileContext.close (fs.js:328:11)
-    at FSReqWrap.readFileAfterRead [as oncomplete] (fs.js:384:15)
-    at ReadFileContext.read (fs.js:312:11)
-    at FSReqWrap.readFileAfterStat [as oncomplete] (fs.js:368:11)
-    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:344:11)
-    at Object.fs.readFile (fs.js:273:11)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:558:3)
+    at ReadFileContext.close (fs.js:467:11)
+    at FSReqWrap.readFileAfterRead [as oncomplete] (fs.js:529:15)
+    at ReadFileContext.read (fs.js:451:11)
+    at FSReqWrap.readFileAfterStat [as oncomplete] (fs.js:513:11)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:483:11)
+    at Object.fs.readFile (fs.js:412:11)
     at Object.<anonymous> (/scripts/simple-fs-read.js:10:4)
-    at Module._compile (module.js:571:32)
+    at Module._compile (module.js:569:30)
     at Object.Module._extensions..js (module.js:580:10)
-    at Module.load (module.js:488:32)
-    at tryModuleLoad (module.js:447:12)
-    at Function.Module._load (module.js:439:3)
-    at Module.runMain (module.js:605:10)
-    at run (bootstrap_node.js:420:7)
-    at startup (bootstrap_node.js:139:9)
-    at bootstrap_node.js:535:3
+    at Module.load (module.js:503:32)
+    at tryModuleLoad (module.js:466:12)
+    at Function.Module._load (module.js:458:3)
+    at Function.Module.runMain (module.js:605:10)
+    at startup (bootstrap_node.js:158:16)
+    at bootstrap_node.js:575:3

@@ -1,20 +1,21 @@
-warning: you are using async-hook which is unstable.
 /scripts/simple-timer.js:9
   throw new Error('trace');
   ^
 
 Error: trace
-    at Timeout.callback (/scripts/simple-timer.js:9:9)
-    at ontimeout (timers.js:365:14)
-    at tryOnTimeout (timers.js:237:5)
-    at Timer.listOnTimeout (timers.js:207:5)
+    at Timeout.callback [as _onTimeout] (/scripts/simple-timer.js:9:9)
+    at ontimeout (timers.js:488:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:283:5)
+    at new Timeout (timers.js:592:5)
+    at createSingleTimeout (timers.js:472:15)
+    at setTimeout (timers.js:456:10)
     at Object.<anonymous> (/scripts/simple-timer.js:8:1)
-    at Module._compile (module.js:571:32)
+    at Module._compile (module.js:569:30)
     at Object.Module._extensions..js (module.js:580:10)
-    at Module.load (module.js:488:32)
-    at tryModuleLoad (module.js:447:12)
-    at Function.Module._load (module.js:439:3)
-    at Module.runMain (module.js:605:10)
-    at run (bootstrap_node.js:420:7)
-    at startup (bootstrap_node.js:139:9)
-    at bootstrap_node.js:535:3
+    at Module.load (module.js:503:32)
+    at tryModuleLoad (module.js:466:12)
+    at Function.Module._load (module.js:458:3)
+    at Function.Module.runMain (module.js:605:10)
+    at startup (bootstrap_node.js:158:16)
+    at bootstrap_node.js:575:3

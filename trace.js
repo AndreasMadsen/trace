@@ -1,7 +1,7 @@
 'use strict';
 
 const chain = require('stack-chain');
-const asyncHook = require('async-hook');
+const asyncHook = require('async_hooks');
 
 // Contains the call site objects of all the prevouse ticks leading
 // up to this one
@@ -12,6 +12,17 @@ const traces = new Map();
 // Mainiputlate stack trace
 //
 // add lastTrace to the callSite array
+chain.filter.attach(function (error, frames) {
+  return frames.filter(function (callSite) {
+    const name = callSite && callSite.getFileName();
+    return (!name || name !== 'async_hooks.js');
+  });
+
+  const lastTrace = stack[stack.length - 1];
+  frames.push.apply(frames, lastTrace);
+  return frames;
+});
+
 chain.extend.attach(function (error, frames) {
   const lastTrace = stack[stack.length - 1];
   frames.push.apply(frames, lastTrace);
@@ -21,13 +32,13 @@ chain.extend.attach(function (error, frames) {
 //
 // Track handle objects
 //
-asyncHook.addHooks({
+const hooks = asyncHook.createHook({
   init: asyncInit,
-  pre: asyncBefore,
-  post: asyncAfter,
+  before: asyncBefore,
+  after: asyncAfter,
   destroy: asyncDestroy
 });
-asyncHook.enable();
+hooks.enable();
 
 function getCallSites(skip) {
   const limit = Error.stackTraceLimit;
@@ -43,12 +54,13 @@ function getCallSites(skip) {
   return stack;
 }
 
-function asyncInit(uid, handle, provider, parentUid) {
+function asyncInit(id, type, triggerId, resource) {
   const trace = getCallSites(2);
 
   // Add all the callSites from previuse ticks
-  const lastTrace = stack[stack.length - 1];
-  trace.push.apply(trace, parentUid === null ? lastTrace : traces.get(parentUid));
+  if (triggerId !== 0) {
+    trace.push.apply(trace, traces.get(triggerId));
+  }
 
   // Cut the trace so it don't contain callSites there won't be shown anyway
   // because of Error.stackTraceLimit
@@ -56,16 +68,16 @@ function asyncInit(uid, handle, provider, parentUid) {
 
   // `trace` now contains callSites from this ticks and all the ticks leading
   // up to this event in time
-  traces.set(uid, trace);
+  traces.set(id, trace);
 }
 
-function asyncBefore(uid) {
+function asyncBefore(id) {
   // push the associated trace to the stack for this specific async action,
   // thereby allowing it to become a part of a error `stack` string.
-  stack.push(traces.get(uid));
+  stack.push(traces.get(id));
 }
 
-function asyncAfter(uid) {
+function asyncAfter(id) {
   // remove the associated on the stack.
   // In some cases the such the handle context is lost. So this prevents the
   // callSites leaking into the wrong stack trace.
@@ -75,6 +87,6 @@ function asyncAfter(uid) {
   stack.pop();
 }
 
-function asyncDestroy(uid) {
-  traces.delete(uid);
+function asyncDestroy(id) {
+  traces.delete(id);
 }
