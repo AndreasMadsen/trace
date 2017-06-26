@@ -1,22 +1,21 @@
-/scripts/regression-net-socket.js:7
+/scripts/regression-net-socket.js:6
   throw new Error('trace');
   ^
 
 Error: trace
-    at Server.<anonymous> (/scripts/regression-net-socket.js:7:9)
+    at Server.<anonymous> (/scripts/regression-net-socket.js:6:9)
     at emitOne (events.js:115:13)
     at Server.emit (events.js:210:7)
-    at TCP.onconnection (net.js:1539:8)
-    at createServerHandle (net.js:1229:14)
-    at Server.setupListenHandle [as _listen2] (net.js:1285:14)
-    at listenInCluster (net.js:1353:12)
-    at doListen (net.js:1479:7)
-    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:84:16)
-    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:100:10)
-    at Object.lookup (dns.js:183:19)
-    at lookupAndListen (net.js:1474:7)
-    at Server.listen (net.js:1449:7)
-    at Object.<anonymous> (/scripts/regression-net-socket.js:10:8)
+    at TCP.onconnection (net.js:1549:8)
+    at createServerHandle (net.js:1239:14)
+    at Server.setupListenHandle [as _listen2] (net.js:1295:14)
+    at listenInCluster (net.js:1363:12)
+    at GetAddrInfoReqWrap.doListen [as callback] (net.js:1489:7)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:97:10)
+    at Object.lookup (dns.js:180:19)
+    at lookupAndListen (net.js:1484:7)
+    at Server.listen (net.js:1459:7)
+    at Object.<anonymous> (/scripts/regression-net-socket.js:9:8)
     at Module._compile (module.js:569:30)
     at Object.Module._extensions..js (module.js:580:10)
     at Module.load (module.js:503:32)

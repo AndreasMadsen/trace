@@ -12,11 +12,11 @@ interpreted({
   expected: path.resolve(__dirname, 'expected'),
   readSource: false,
 
-  update: false,
+  update: true,
 
   test: function (name, callback) {
     const filepath = path.join(SCRIPTS_PATH, name + '.js');
-    const p = execspawn(`${process.execPath} --stack-trace-limit=1000 ${JSON.stringify(filepath)} 2>&1`);
+    const p = execspawn(`${process.execPath} -r ../trace.js --stack-trace-limit=1000 ${JSON.stringify(filepath)} 2>&1`);
     p.stdout.pipe(endpoint(function (err, output) {
       if (err) return callback(err);
       callback(null, simplify(output.toString('ascii')));

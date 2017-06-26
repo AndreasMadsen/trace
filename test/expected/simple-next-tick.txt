@@ -1,17 +1,16 @@
-/scripts/simple-next-tick.js:9
+/scripts/simple-next-tick.js:8
   throw new Error('trace');
   ^
 
 Error: trace
-    at callback (/scripts/simple-next-tick.js:9:9)
-    at _combinedTickCallback (internal/process/next_tick.js:95:7)
-    at process._tickCallback (internal/process/next_tick.js:161:9)
+    at callback (/scripts/simple-next-tick.js:8:9)
+    at _combinedTickCallback (internal/process/next_tick.js:134:7)
+    at process._tickCallback (internal/process/next_tick.js:201:9)
     at Function.Module.runMain (module.js:607:11)
     at startup (bootstrap_node.js:158:16)
     at bootstrap_node.js:575:3
-    at setupInit (internal/process/next_tick.js:225:7)
-    at process.nextTick (internal/process/next_tick.js:247:5)
-    at Object.<anonymous> (/scripts/simple-next-tick.js:8:9)
+    at process.nextTick (internal/process/next_tick.js:291:7)
+    at Object.<anonymous> (/scripts/simple-next-tick.js:7:9)
     at Module._compile (module.js:569:30)
     at Object.Module._extensions..js (module.js:580:10)
     at Module.load (module.js:503:32)

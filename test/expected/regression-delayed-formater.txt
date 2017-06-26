@@ -1,9 +1,9 @@
-/scripts/regression-delayed-formater.js:18
+/scripts/regression-delayed-formater.js:17
 throw new Error('trace');
 ^
 
 Error: trace
-    at-hack Object.<anonymous> (/scripts/regression-delayed-formater.js:18:7)
+    at-hack Object.<anonymous> (/scripts/regression-delayed-formater.js:17:7)
     at-hack Module._compile (module.js:569:30)
     at-hack Object.Module._extensions..js (module.js:580:10)
     at-hack Module.load (module.js:503:32)

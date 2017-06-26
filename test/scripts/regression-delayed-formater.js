@@ -1,5 +1,4 @@
 'use strict';
-require('../../trace.js');
 
 Error.prepareStackTrace = function (error, frames) {
   const lines = [ error.toString() ];

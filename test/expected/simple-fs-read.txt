@@ -1,17 +1,17 @@
-/scripts/simple-fs-read.js:11
+/scripts/simple-fs-read.js:10
   throw new Error('trace');
   ^
 
 Error: trace
-    at callback (/scripts/simple-fs-read.js:11:9)
-    at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:558:3)
-    at ReadFileContext.close (fs.js:467:11)
-    at FSReqWrap.readFileAfterRead [as oncomplete] (fs.js:529:15)
-    at ReadFileContext.read (fs.js:451:11)
-    at FSReqWrap.readFileAfterStat [as oncomplete] (fs.js:513:11)
-    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:483:11)
-    at Object.fs.readFile (fs.js:412:11)
-    at Object.<anonymous> (/scripts/simple-fs-read.js:10:4)
+    at callback (/scripts/simple-fs-read.js:10:9)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:503:3)
+    at ReadFileContext.close (fs.js:412:11)
+    at FSReqWrap.readFileAfterRead [as oncomplete] (fs.js:474:15)
+    at ReadFileContext.read (fs.js:396:11)
+    at FSReqWrap.readFileAfterStat [as oncomplete] (fs.js:458:11)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:428:11)
+    at Object.fs.readFile (fs.js:357:11)
+    at Object.<anonymous> (/scripts/simple-fs-read.js:9:4)
     at Module._compile (module.js:569:30)
     at Object.Module._extensions..js (module.js:580:10)
     at Module.load (module.js:503:32)

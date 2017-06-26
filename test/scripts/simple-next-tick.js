@@ -1,5 +1,4 @@
 'use strict';
-require('../../trace.js');
 
 //
 // test process method (nextTick)

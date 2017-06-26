@@ -1,16 +1,16 @@
-/scripts/simple-timer.js:9
+/scripts/simple-timer.js:8
   throw new Error('trace');
   ^
 
 Error: trace
-    at Timeout.callback [as _onTimeout] (/scripts/simple-timer.js:9:9)
+    at Timeout.callback [as _onTimeout] (/scripts/simple-timer.js:8:9)
     at ontimeout (timers.js:488:11)
     at tryOnTimeout (timers.js:323:5)
     at Timer.listOnTimeout (timers.js:283:5)
     at new Timeout (timers.js:592:5)
     at createSingleTimeout (timers.js:472:15)
     at setTimeout (timers.js:456:10)
-    at Object.<anonymous> (/scripts/simple-timer.js:8:1)
+    at Object.<anonymous> (/scripts/simple-timer.js:7:1)
     at Module._compile (module.js:569:30)
     at Object.Module._extensions..js (module.js:580:10)
     at Module.load (module.js:503:32)

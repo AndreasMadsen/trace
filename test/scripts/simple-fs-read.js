@@ -1,5 +1,4 @@
 'use strict';
-require('../../trace.js');
 
 const fs = require('fs');
 

@@ -1,24 +1,22 @@
-/scripts/regression-net-connect.js:12
+/scripts/regression-net-connect.js:11
   throw error;
   ^
 
 Error: connect ECONNREFUSED 127.0.0.1:24075
-    at Object.exports._errnoException (util.js:1026:11)
-    at exports._exceptionWithHostPort (util.js:1049:20)
-    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1136:14)
-    at setupInit (internal/process/next_tick.js:225:7)
-    at process.nextTick (internal/process/next_tick.js:247:5)
+    at Object.exports._errnoException (util.js:1020:11)
+    at exports._exceptionWithHostPort (util.js:1043:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1146:14)
+    at process.nextTick (internal/process/next_tick.js:291:7)
     at _destroy (internal/streams/destroy.js:34:15)
-    at Socket._destroy (net.js:553:3)
+    at Socket._destroy (net.js:556:3)
     at Socket.destroy (internal/streams/destroy.js:32:8)
-    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1145:10)
-    at internalConnect (net.js:908:26)
-    at emitLookup (net.js:1060:7)
-    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:84:16)
-    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:100:10)
-    at Socket.connect (net.js:969:40)
-    at Object.connect (net.js:107:35)
-    at Object.<anonymous> (/scripts/regression-net-connect.js:10:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1155:10)
+    at internalConnect (net.js:911:26)
+    at GetAddrInfoReqWrap.emitLookup [as callback] (net.js:1070:7)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:97:10)
+    at Socket.connect (net.js:973:40)
+    at Object.connect (net.js:108:35)
+    at Object.<anonymous> (/scripts/regression-net-connect.js:9:20)
     at Module._compile (module.js:569:30)
     at Object.Module._extensions..js (module.js:580:10)
     at Module.load (module.js:503:32)

@@ -1,5 +1,4 @@
 'use strict';
-require('../../trace.js');
 
 const a = setTimeout(function () {
   throw new Error('setTimeout callback should not be called');
