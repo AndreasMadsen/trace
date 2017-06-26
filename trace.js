@@ -3,9 +3,12 @@
 const chain = require('stack-chain');
 const asyncHook = require('async_hooks');
 
-// Contains the call site objects of all the prevouse ticks leading
-// up to this one
-const stack = [null];
+// Contains init asyncId of the active scope(s)
+// Because we can't know when the root scope ends, a permanent Set is keept
+// for the root scope.
+const executionScopeInits = new Set();
+let executionScopeDepth = 0;
+// Contains the call site objects of all active scopes
 const traces = new Map();
 
 //
@@ -17,14 +20,10 @@ chain.filter.attach(function (error, frames) {
     const name = callSite && callSite.getFileName();
     return (!name || name !== 'async_hooks.js');
   });
-
-  const lastTrace = stack[stack.length - 1];
-  frames.push.apply(frames, lastTrace);
-  return frames;
 });
 
 chain.extend.attach(function (error, frames) {
-  const lastTrace = stack[stack.length - 1];
+  const lastTrace = traces.get(asyncHook.executionAsyncId());
   frames.push.apply(frames, lastTrace);
   return frames;
 });
@@ -54,12 +53,48 @@ function getCallSites(skip) {
   return stack;
 }
 
-function asyncInit(id, type, triggerId, resource) {
+function equalCallSite(a, b) {
+  const aFile = a.getFileName();
+  const aLine = a.getLineNumber();
+  const aColumn = a.getColumnNumber();
+
+  if (aFile === null || aLine === null || aColumn === null) {
+    return false;
+  }
+
+  return (aFile === b.getFileName() &&
+          aLine === b.getLineNumber() &&
+          aColumn === b.getColumnNumber());
+}
+
+function asyncInit(asyncId, type, triggerAsyncId, resource) {
   const trace = getCallSites(2);
 
+  // In cases where the trigger is in the same synchronous execution scope
+  // as this resource, the stack trace of the trigger will overlap with
+  // `trace`, this mostly happens with promises.
+  // Example:
+  //   p0 = Promise.resolve(1); // will have `root` in stack trace
+  //   p1 = p0.then(() => throw new Error('hello')); // will also have `root`
+  // The async stack trace should be: root, p0, p1
+  //
+  // To avoid (n^2) string matching, it is assumed that `Error.stackTraceLimit`
+  // hasn't changed. By this assumtion we know the current trace will go beyond
+  // the trigger trace, thus the check can be limited to trace[-1].
+  if (executionScopeInits.has(triggerAsyncId)) {
+    const parentTrace = traces.get(triggerAsyncId);
+
+    let i = parentTrace.length;
+    while(i--) {
+      if (equalCallSite(parentTrace[i], trace[trace.length - 1])) {
+        trace.pop();
+      }
+    }
+  }
+
   // Add all the callSites from previuse ticks
-  if (triggerId !== 0) {
-    trace.push.apply(trace, traces.get(triggerId));
+  if (triggerAsyncId !== 0) {
+    trace.push.apply(trace, traces.get(triggerAsyncId));
   }
 
   // Cut the trace so it don't contain callSites there won't be shown anyway
@@ -68,25 +103,23 @@ function asyncInit(id, type, triggerId, resource) {
 
   // `trace` now contains callSites from this ticks and all the ticks leading
   // up to this event in time
-  traces.set(id, trace);
+  traces.set(asyncId, trace);
+
+  // add asyncId to the list of all inits in this execution scope
+  executionScopeInits.add(asyncId);
 }
 
-function asyncBefore(id) {
-  // push the associated trace to the stack for this specific async action,
-  // thereby allowing it to become a part of a error `stack` string.
-  stack.push(traces.get(id));
+function asyncBefore(asyncId) {
+  if (executionScopeDepth === 0) {
+    executionScopeInits.clear();
+  }
+  executionScopeDepth += 1;
 }
 
-function asyncAfter(id) {
-  // remove the associated on the stack.
-  // In some cases the such the handle context is lost. So this prevents the
-  // callSites leaking into the wrong stack trace.
-  // In other cases MakeCallback is called synchronously, this causes there
-  // to be more than one push on the stack. So this also recover the relevant
-  // stack for the parent.
-  stack.pop();
+function asyncAfter(asyncId) {
+  executionScopeDepth -= 1;
 }
 
-function asyncDestroy(id) {
-  traces.delete(id);
+function asyncDestroy(asyncId) {
+  traces.delete(asyncId);
 }

@@ -1,0 +1,19 @@
+Error: hello
+    at scopeThrow (/scripts/promise-child-stack.js:5:17)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:209:7)
+    at Function.Module.runMain (module.js:607:11)
+    at startup (bootstrap_node.js:158:16)
+    at bootstrap_node.js:575:3
+    at Promise.then (<anonymous>)
+    at Object.<anonymous> (/scripts/promise-child-stack.js:4:15)
+    at Function.resolve (<anonymous>)
+    at Object.<anonymous> (/scripts/promise-child-stack.js:3:20)
+    at Module._compile (module.js:569:30)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:503:32)
+    at tryModuleLoad (module.js:466:12)
+    at Function.Module._load (module.js:458:3)
+    at Function.Module.runMain (module.js:605:10)
+    at startup (bootstrap_node.js:158:16)
+    at bootstrap_node.js:575:3

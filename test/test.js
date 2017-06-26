@@ -12,7 +12,7 @@ interpreted({
   expected: path.resolve(__dirname, 'expected'),
   readSource: false,
 
-  update: true,
+  update: false,
 
   test: function (name, callback) {
     const filepath = path.join(SCRIPTS_PATH, name + '.js');
