@@ -85,7 +85,7 @@ function asyncInit(asyncId, type, triggerAsyncId, resource) {
     const parentTrace = traces.get(triggerAsyncId);
 
     let i = parentTrace.length;
-    while(i--) {
+    while(i-- && trace.length > 1) {
       if (equalCallSite(parentTrace[i], trace[trace.length - 1])) {
         trace.pop();
       }
