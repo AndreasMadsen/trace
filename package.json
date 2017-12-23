@@ -20,7 +20,7 @@
     "async"
   ],
   "dependencies": {
-    "stack-chain": "^1.3.5"
+    "stack-chain": "^2.0.0"
   },
   "devDependencies": {
     "interpreted": "^0.6.0",
@@ -28,7 +28,7 @@
     "endpoint": "^0.4.0",
     "clarify": "^2.0.0",
     "summary": "^0.3.0",
-    "tap": "^8.0.1"
+    "tap": "^11.0.0"
   },
   "license": "MIT",
   "engines": {
