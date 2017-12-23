@@ -1,19 +1,21 @@
 Error: hello
-    at scopeThrow (/scripts/promise-child-stack.js:5:17)
+    at scopeThrow (/scripts/promise-child-stack.js:r:c)
     at <anonymous>
-    at process._tickCallback (internal/process/next_tick.js:209:7)
-    at Function.Module.runMain (module.js:607:11)
-    at startup (bootstrap_node.js:158:16)
-    at bootstrap_node.js:575:3
+    at process._tickCallback (internal/process/next_tick.js:r:c)
+    at Function.Module.runMain (module.js:r:c)
+    at startup (bootstrap_node.js:r:c)
+    at bootstrap_node.js:r:c
+    at PromiseWrap.emitInitNative (internal/async_hooks.js:r:c)
     at Promise.then (<anonymous>)
-    at Object.<anonymous> (/scripts/promise-child-stack.js:4:15)
+    at Object.<anonymous> (/scripts/promise-child-stack.js:r:c)
+    at PromiseWrap.emitInitNative (internal/async_hooks.js:r:c)
     at Function.resolve (<anonymous>)
-    at Object.<anonymous> (/scripts/promise-child-stack.js:3:20)
-    at Module._compile (module.js:569:30)
-    at Object.Module._extensions..js (module.js:580:10)
-    at Module.load (module.js:503:32)
-    at tryModuleLoad (module.js:466:12)
-    at Function.Module._load (module.js:458:3)
-    at Function.Module.runMain (module.js:605:10)
-    at startup (bootstrap_node.js:158:16)
-    at bootstrap_node.js:575:3
+    at Object.<anonymous> (/scripts/promise-child-stack.js:r:c)
+    at Module._compile (module.js:r:c)
+    at Object.Module._extensions..js (module.js:r:c)
+    at Module.load (module.js:r:c)
+    at tryModuleLoad (module.js:r:c)
+    at Function.Module._load (module.js:r:c)
+    at Function.Module.runMain (module.js:r:c)
+    at startup (bootstrap_node.js:r:c)
+    at bootstrap_node.js:r:c

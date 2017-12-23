@@ -19,14 +19,14 @@ interpreted({
     const p = execspawn(`${process.execPath} -r ../trace.js --stack-trace-limit=1000 ${JSON.stringify(filepath)} 2>&1`);
     p.stdout.pipe(endpoint(function (err, output) {
       if (err) return callback(err);
-      callback(null, simplify(output.toString('ascii')));
+      callback(null, stripPosInfo(stripPath(output.toString('ascii'))));
     }));
   },
 
   types: {
     'txt': {
       test: function (t, actual, expected) {
-        t.strictEqual(stripPosInfo(actual), stripPosInfo(expected));
+        t.strictEqual(actual, expected);
       },
       update: function (actual) {
         return actual;
@@ -35,7 +35,7 @@ interpreted({
   }
 });
 
-function simplify(output) {
+function stripPath(output) {
   return output.split(__dirname).join('');
 }
 
