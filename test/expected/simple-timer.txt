@@ -3,20 +3,5 @@
   ^
 
 Error: trace
-    at Timeout.callback [as _onTimeout] (/scripts/simple-timer.js:r:c)
-    at ontimeout (timers.js:r:c)
-    at tryOnTimeout (timers.js:r:c)
-    at Timer.listOnTimeout (timers.js:r:c)
-    at emitInitNative (internal/async_hooks.js:r:c)
-    at emitInitScript (internal/async_hooks.js:r:c)
-    at new Timeout (timers.js:r:c)
-    at setTimeout (timers.js:r:c)
-    at Object.<anonymous> (/scripts/simple-timer.js:r:c)
-    at Module._compile (module.js:r:c)
-    at Object.Module._extensions..js (module.js:r:c)
-    at Module.load (module.js:r:c)
-    at tryModuleLoad (module.js:r:c)
-    at Function.Module._load (module.js:r:c)
-    at Function.Module.runMain (module.js:r:c)
-    at startup (bootstrap_node.js:r:c)
-    at bootstrap_node.js:r:c
+    at Timeout.callback [as _onTimeout] (/scripts/simple-timer.js:8:9)
+    at Object.<anonymous> (/scripts/simple-timer.js:7:1)

@@ -3,24 +3,5 @@
   ^
 
 Error: trace
-    at callback (/scripts/simple-fs-read.js:r:c)
-    at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:r:c)
-    at FSReqWrap.emitInitNative (internal/async_hooks.js:r:c)
-    at ReadFileContext.close (fs.js:r:c)
-    at FSReqWrap.readFileAfterRead [as oncomplete] (fs.js:r:c)
-    at FSReqWrap.emitInitNative (internal/async_hooks.js:r:c)
-    at ReadFileContext.read (fs.js:r:c)
-    at FSReqWrap.readFileAfterStat [as oncomplete] (fs.js:r:c)
-    at FSReqWrap.emitInitNative (internal/async_hooks.js:r:c)
-    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:r:c)
-    at FSReqWrap.emitInitNative (internal/async_hooks.js:r:c)
-    at Object.fs.readFile (fs.js:r:c)
-    at Object.<anonymous> (/scripts/simple-fs-read.js:r:c)
-    at Module._compile (module.js:r:c)
-    at Object.Module._extensions..js (module.js:r:c)
-    at Module.load (module.js:r:c)
-    at tryModuleLoad (module.js:r:c)
-    at Function.Module._load (module.js:r:c)
-    at Function.Module.runMain (module.js:r:c)
-    at startup (bootstrap_node.js:r:c)
-    at bootstrap_node.js:r:c
+    at callback (/scripts/simple-fs-read.js:10:9)
+    at Object.<anonymous> (/scripts/simple-fs-read.js:9:4)

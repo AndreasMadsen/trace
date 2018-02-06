@@ -3,12 +3,4 @@ throw new Error('trace');
 ^
 
 Error: trace
-    at-hack Object.<anonymous> (/scripts/regression-delayed-formater.js:r:c)
-    at-hack Module._compile (module.js:r:c)
-    at-hack Object.Module._extensions..js (module.js:r:c)
-    at-hack Module.load (module.js:r:c)
-    at-hack tryModuleLoad (module.js:r:c)
-    at-hack Function.Module._load (module.js:r:c)
-    at-hack Function.Module.runMain (module.js:r:c)
-    at-hack startup (bootstrap_node.js:r:c)
-    at-hack bootstrap_node.js:r:c
+    at-hack Object.<anonymous> (/scripts/regression-delayed-formater.js:17:7)
