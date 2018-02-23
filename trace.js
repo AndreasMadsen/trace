@@ -1,7 +1,7 @@
 'use strict';
 
 const DEBUG = false;
-const {debug} = DEBUG ? require('./debug') : {};
+const {printRootTraces, debug} = DEBUG ? require('./debug') : {};
 
 // Arbitrarily limit ourselves so we don't use up all memory on storing stack traces
 const MAX_RELATED_TRACES = 10;
@@ -37,6 +37,7 @@ function extendFrames(error, frames) {
 
   if (DEBUG) {
     debug(`extending: ${asyncId} with ${trace.stacks.map(({asyncId}) => asyncId)}`);
+    printRootTraces(traces);
   }
 
   for (const stack of trace.stacks) {
