@@ -1,21 +1,17 @@
 'use strict';
 
+const DEBUG = false;
+const {debug} = DEBUG ? require('./debug') : {};
+
 const chain = require('stack-chain');
 const asyncHook = require('async_hooks');
 
-// Contains init asyncId of the active scope(s)
-// Because we can't know when the root scope ends, a permanent Set is keept
-// for the root scope.
-const executionScopeInits = new Set();
-let executionScopeDepth = 0;
-
-// Contains the call site objects of all active scopes
+// Contains the Trace objects of all active async execution contexts
 const traces = new Map();
 
 // Manipulate stack traces
 chain.filter.attach(filterFrames);
 chain.extend.attach(extendFrames);
-
 function filterFrames(error, frames) {
   return frames.filter((callSite) => {
     const name = callSite && callSite.getFileName();
@@ -23,18 +19,43 @@ function filterFrames(error, frames) {
   });
 }
 function extendFrames(error, frames) {
-  const lastTrace = traces.get(asyncHook.executionAsyncId());
-  frames.push.apply(frames, lastTrace);
+  const asyncId = asyncHook.executionAsyncId();
+  const trace = traces.get(asyncId);
+
+  if (!trace) {
+    return frames;
+  }
+
+
+  trace.sortStacks();
+
+  if (DEBUG) {
+    debug(`extending: ${asyncId} with ${trace.stacks.map(({asyncId}) => asyncId)}`);
+  }
+
+  for (const stack of trace.stacks) {
+    appendUniqueFrames(frames, stack.frames);
+  }
+
   return frames;
 }
+
+function appendUniqueFrames(frames, newFrames) {
+  for (let i = 1; i <= newFrames.length && frames.length > 1; ++i) {
+    if (equalCallSite(newFrames[newFrames.length - i], frames[frames.length - 1])) {
+      frames.pop();
+    }
+  }
+
+  frames.push(...newFrames);
+}
+
 
 //
 // Track handle objects
 //
 const hooks = asyncHook.createHook({
   init: asyncInit,
-  before: asyncBefore,
-  after: asyncAfter,
   destroy: asyncDestroy
 });
 hooks.enable();
@@ -43,14 +64,14 @@ function getCallSites(skip) {
   const limit = Error.stackTraceLimit;
 
   Error.stackTraceLimit = limit + skip;
-  const stack = chain.callSite({
+  const frames = chain.callSite({
     extend: false,
     filter: true,
     slice: skip
   });
   Error.stackTraceLimit = limit;
 
-  return copyFrames(stack);
+  return copyFrames(frames);
 }
 
 // We must take a copy of the CallSite objects to avoid retaining references to Promises.
@@ -90,73 +111,70 @@ function equalCallSite(a, b) {
   const aLine = a.getLineNumber();
   const aColumn = a.getColumnNumber();
 
-  if (aFile === null || aLine === null || aColumn === null) {
-    return false;
-  }
-
   return (aFile === b.getFileName() &&
           aLine === b.getLineNumber() &&
           aColumn === b.getColumnNumber());
 }
 
-
 //
 // Async hook functions
 //
 
-function asyncInit(asyncId, type, triggerAsyncId, resource) {
-  const trace = getCallSites(2);
-
-  // In cases where the trigger is in the same synchronous execution scope
-  // as this resource, the stack trace of the trigger will overlap with
-  // `trace`, this mostly happens with promises.
-  // Example:
-  //   p0 = Promise.resolve(1); // will have `root` in stack trace
-  //   p1 = p0.then(() => throw new Error('hello')); // will also have `root`
-  // The async stack trace should be: root, p0, p1
-  //
-  // To avoid (n^2) string matching, it is assumed that `Error.stackTraceLimit`
-  // hasn't changed. By this assumtion we know the current trace will go beyond
-  // the trigger trace, thus the check can be limited to trace[-1].
-  if (executionScopeInits.has(triggerAsyncId)) {
-    const parentTrace = traces.get(triggerAsyncId);
-
-    let i = parentTrace.length;
-    while(i-- && trace.length > 1) {
-      if (equalCallSite(parentTrace[i], trace[trace.length - 1])) {
-        trace.pop();
-      }
-    }
-  }
-
-  // Add all the callSites from previuse ticks
-  if (triggerAsyncId !== 0) {
-    trace.push.apply(trace, traces.get(triggerAsyncId));
-  }
-
-  // Cut the trace so it don't contain callSites there won't be shown anyway
-  // because of Error.stackTraceLimit
-  trace.splice(Error.stackTraceLimit);
-
-  // `trace` now contains callSites from this ticks and all the ticks leading
-  // up to this event in time
+function asyncInit(asyncId, type, triggerAsyncId) {
+  const frames = getCallSites(2);
+  const stack = new NamedStack(asyncId, frames);
+  const trace = new Trace(asyncId, stack);
   traces.set(asyncId, trace);
+  if (DEBUG) debug(`asyncInit ${stack}`);
 
-  // add asyncId to the list of all inits in this execution scope
-  executionScopeInits.add(asyncId);
-}
-
-function asyncBefore(asyncId) {
-  if (executionScopeDepth === 0) {
-    executionScopeInits.clear();
+  const triggerTrace = traces.get(triggerAsyncId);
+  if (triggerTrace) {
+    triggerTrace.recordRelatedTrace(trace);
   }
-  executionScopeDepth += 1;
-}
-
-function asyncAfter(asyncId) {
-  executionScopeDepth -= 1;
 }
 
 function asyncDestroy(asyncId) {
+  if (DEBUG) debug(`asyncDestroy ${asyncId}`);
   traces.delete(asyncId);
 }
+
+
+
+//
+// Async context graph data structure
+//
+
+class NamedStack {
+  constructor(asyncId, frames) {
+    this.asyncId = asyncId;
+    this.frames = frames;
+  }
+
+  toString() {
+    return `${this.asyncId}\n  ${this.frames.join('\n  ')}\n`;
+  }
+}
+
+class Trace {
+  constructor(asyncId, stack) {
+    this.asyncId = asyncId;
+    this.stacks = [stack];
+  }
+
+  recordRelatedTrace(trace) {
+    mergeStacks(trace.stacks, this.stacks);
+  }
+
+  sortStacks() {
+    this.stacks.sort((a, b) => b.asyncId - a.asyncId);
+  }
+}
+
+function mergeStacks(dest, source) {
+  for (const stack of source) {
+    if (!dest.includes(stack)) {
+      dest.push(stack);
+    }
+  }
+}
+
