@@ -24,6 +24,7 @@ const hooks = asyncHook.createHook({
   destroy: asyncDestroy
 });
 hooks.enable();
+exports.disable = () => hooks.disable();
 
 
 //
