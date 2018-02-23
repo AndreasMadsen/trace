@@ -4,4 +4,5 @@
 
 Error: trace
     at callback (/scripts/simple-next-tick.js:8:9)
+    at ____________________:0:0
     at Object.<anonymous> (/scripts/simple-next-tick.js:7:9)

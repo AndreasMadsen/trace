@@ -21,6 +21,14 @@ const hooks = asyncHook.createHook({
 hooks.enable();
 exports.disable = () => hooks.disable();
 
+// A fake CallSite which visually separates stacks from different async contexts
+const asyncContextCallSiteMarker = {
+  getFileName: () => null,
+  getLineNumber: () => 0,
+  getColumnNumber: () => 0,
+  toString: () => '____________________:0:0'
+};
+
 
 //
 // Extending frames
@@ -55,6 +63,7 @@ function appendUniqueFrames(frames, newFrames) {
     }
   }
 
+  frames.push(asyncContextCallSiteMarker);
   frames.push(...newFrames);
 }
 

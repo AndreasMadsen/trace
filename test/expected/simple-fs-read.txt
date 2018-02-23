@@ -4,4 +4,8 @@
 
 Error: trace
     at callback (/scripts/simple-fs-read.js:10:9)
+    at ____________________:0:0
+    at ____________________:0:0
+    at ____________________:0:0
+    at ____________________:0:0
     at Object.<anonymous> (/scripts/simple-fs-read.js:9:4)

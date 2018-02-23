@@ -4,4 +4,6 @@
 
 Error: trace
     at Server.<anonymous> (/scripts/regression-net-socket.js:6:9)
+    at ____________________:0:0
+    at ____________________:0:0
     at Object.<anonymous> (/scripts/regression-net-socket.js:9:8)

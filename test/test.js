@@ -41,10 +41,11 @@ function prepareString(text) {
   const processedLines = lines.map((line) => {
     const isTraceLine = line.match(/:[0-9]+:[0-9]+/);
     const isFromTestScript = line.includes(__dirname);
+    const isMarkerLine = line.includes('____________________');
 
     const processedLine = line.replace(__dirname, '') + '\n';
 
-    if (isTraceLine && !isFromTestScript) {
+    if (isTraceLine && !isFromTestScript && !isMarkerLine) {
       // Only include stack trace lines from our test code.
       // This stops the tests from breaking whenever we change Node.js version.
       return '';

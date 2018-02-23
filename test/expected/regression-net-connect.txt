@@ -3,4 +3,7 @@
   ^
 
 Error: connect ECONNREFUSED 127.0.0.1:24075
+    at ____________________:0:0
+    at ____________________:0:0
+    at ____________________:0:0
     at Object.<anonymous> (/scripts/regression-net-connect.js:9:20)

@@ -4,4 +4,5 @@
 
 Error: trace
     at Timeout.callback [as _onTimeout] (/scripts/simple-timer.js:8:9)
+    at ____________________:0:0
     at Object.<anonymous> (/scripts/simple-timer.js:7:1)

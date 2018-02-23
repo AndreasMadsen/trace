@@ -4,7 +4,15 @@
 
 Error: trace
     at Server.close (/scripts/regression-http-close.js:20:15)
+    at ____________________:0:0
     at IncomingMessage.end (/scripts/regression-http-close.js:19:14)
+    at ____________________:0:0
+    at ____________________:0:0
     at ClientRequest.get (/scripts/regression-http-close.js:16:9)
+    at ____________________:0:0
+    at ____________________:0:0
     at Server.listen (/scripts/regression-http-close.js:15:8)
+    at ____________________:0:0
+    at ____________________:0:0
+    at ____________________:0:0
     at Object.<anonymous> (/scripts/regression-http-close.js:11:4)
