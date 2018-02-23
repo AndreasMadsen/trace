@@ -40,6 +40,14 @@ const hooks = asyncHook.createHook({
 hooks.enable();
 exports.disable = () => hooks.disable();
 
+// A fake CallSite which visually separates stacks from different async contexts
+const asyncContextCallSiteMarker = {
+  getFileName: () => null,
+  getLineNumber: () => 0,
+  getColumnNumber: () => 0,
+  toString: () => '____________________:0:0'
+};
+
 function getCallSites(skip) {
   const limit = Error.stackTraceLimit;
 
@@ -95,6 +103,7 @@ function asyncInit(asyncId, type, triggerAsyncId, resource) {
 
   // Add all the callSites from previuse ticks
   if (triggerAsyncId !== 0) {
+    trace.push(asyncContextCallSiteMarker);
     trace.push.apply(trace, traces.get(triggerAsyncId));
   }
 
