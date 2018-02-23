@@ -3,6 +3,11 @@
 const DEBUG = false;
 const {debug} = DEBUG ? require('./debug') : {};
 
+// Arbitrarily limit ourselves so we don't use up all memory on storing stack traces
+const MAX_RELATED_TRACES = 10;
+const MAX_RELATED_TRAVERSAL_DEPTH = 10;
+const MAX_STACKS_TO_JOIN = 50;
+
 const chain = require('stack-chain');
 const asyncHook = require('async_hooks');
 
@@ -180,17 +185,40 @@ class Trace {
     }
 
     this.relatedTraces.push(relatedTrace);
+    this.removeOldestRelatedTraces();
 
     for (const subRelatedTrace of relatedTrace.walk()) {
       mergeStacks(subRelatedTrace.stacks, this.stacks);
+      subRelatedTrace.removeOldestStacks();
     }
+  }
+
+  removeOldestRelatedTraces() {
+    if (this.relatedTraces.length < MAX_RELATED_TRACES) {
+      return;
+    }
+
+    this.relatedTraces.sort((a, b) => b.asyncId - b.asyncId);
+    this.relatedTraces.length = MAX_RELATED_TRACES
   }
 
   sortStacks() {
     this.stacks.sort((a, b) => b.asyncId - a.asyncId);
   }
 
+  removeOldestStacks() {
+    if (this.stacks.length < MAX_STACKS_TO_JOIN) {
+      return;
+    }
+
+    this.sortStacks();
+    this.stacks.length = MAX_STACKS_TO_JOIN;
+  }
+
   walk(visited=[this], depth=0) {
+    if (depth > MAX_RELATED_TRAVERSAL_DEPTH) {
+      return;
+    }
     for (const trace of this.relatedTraces) {
       if (!visited.includes(trace)) {
         visited.push(trace);
