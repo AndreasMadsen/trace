@@ -8,29 +8,15 @@ const asyncHook = require('async_hooks');
 // for the root scope.
 const executionScopeInits = new Set();
 let executionScopeDepth = 0;
+
 // Contains the call site objects of all active scopes
 const traces = new Map();
 
-//
-// Mainiputlate stack trace
-//
-// add lastTrace to the callSite array
-chain.filter.attach(function (error, frames) {
-  return frames.filter(function (callSite) {
-    const name = callSite && callSite.getFileName();
-    return name !== 'async_hooks.js' && name !== 'internal/async_hooks.js';
-  });
-});
+// Manipulate stack traces
+chain.filter.attach(filterFrames);
+chain.extend.attach(extendFrames);
 
-chain.extend.attach(function (error, frames) {
-  const lastTrace = traces.get(asyncHook.executionAsyncId());
-  frames.push.apply(frames, lastTrace);
-  return frames;
-});
-
-//
 // Track handle objects
-//
 const hooks = asyncHook.createHook({
   init: asyncInit,
   before: asyncBefore,
@@ -38,6 +24,22 @@ const hooks = asyncHook.createHook({
   destroy: asyncDestroy
 });
 hooks.enable();
+
+
+//
+// Extending frames
+//
+
+function extendFrames(error, frames) {
+  const lastTrace = traces.get(asyncHook.executionAsyncId());
+  frames.push.apply(frames, lastTrace);
+  return frames;
+}
+
+
+//
+// Capturing frames
+//
 
 function getCallSites(skip) {
   const limit = Error.stackTraceLimit;
@@ -51,6 +53,13 @@ function getCallSites(skip) {
   Error.stackTraceLimit = limit;
 
   return copyFrames(stack);
+}
+
+function filterFrames(error, frames) {
+  return frames.filter((callSite) => {
+    const name = callSite && callSite.getFileName();
+    return name !== 'async_hooks.js' && name !== 'internal/async_hooks.js';
+  });
 }
 
 // We must take a copy of the CallSite objects to avoid retaining references to Promises.
@@ -98,6 +107,11 @@ function equalCallSite(a, b) {
           aLine === b.getLineNumber() &&
           aColumn === b.getColumnNumber());
 }
+
+
+//
+// Async hook functions
+//
 
 function asyncInit(asyncId, type, triggerAsyncId, resource) {
   const trace = getCallSites(2);
