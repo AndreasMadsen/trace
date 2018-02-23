@@ -1,0 +1,29 @@
+Error: FAIL
+    at f1 (/scripts/async-await-follow.js:3:9)
+    at ____________________:0:0
+    at ____________________:0:0
+    at f1.<anonymous> (<anonymous>)
+    at f1 (/scripts/async-await-follow.js:2:17)
+    at ____________________:0:0
+    at <anonymous>
+    at f1 (/scripts/async-await-follow.js:1:80)
+    at f2 (/scripts/async-await-follow.js:8:9)
+    at ____________________:0:0
+    at ____________________:0:0
+    at ____________________:0:0
+    at ____________________:0:0
+    at f2.<anonymous> (<anonymous>)
+    at f2 (/scripts/async-await-follow.js:7:17)
+    at ____________________:0:0
+    at <anonymous>
+    at f2 (/scripts/async-await-follow.js:6:18)
+    at f3 (/scripts/async-await-follow.js:14:11)
+    at <anonymous>
+    at ____________________:0:0
+    at ____________________:0:0
+    at f3.<anonymous> (<anonymous>)
+    at f3 (/scripts/async-await-follow.js:12:17)
+    at ____________________:0:0
+    at <anonymous>
+    at f3 (/scripts/async-await-follow.js:11:18)
+    at Object.<anonymous> (/scripts/async-await-follow.js:20:1)

@@ -18,6 +18,7 @@ function filterFrames(error, frames) {
     return name !== 'async_hooks.js' && name !== 'internal/async_hooks.js';
   });
 }
+
 function extendFrames(error, frames) {
   const asyncId = asyncHook.executionAsyncId();
   const trace = traces.get(asyncId);
@@ -56,7 +57,8 @@ function appendUniqueFrames(frames, newFrames) {
 //
 const hooks = asyncHook.createHook({
   init: asyncInit,
-  destroy: asyncDestroy
+  destroy: asyncDestroy,
+  promiseResolve: asyncPromiseResolve
 });
 hooks.enable();
 
@@ -138,6 +140,16 @@ function asyncDestroy(asyncId) {
   traces.delete(asyncId);
 }
 
+function asyncPromiseResolve(asyncId) {
+  const triggerAsyncId = asyncHook.triggerAsyncId();
+
+  const triggerTrace = traces.get(triggerAsyncId);
+  const trace = traces.get(asyncId);
+
+  if (trace && triggerTrace) {
+    triggerTrace.recordRelatedTrace(trace);
+  }
+}
 
 
 //
@@ -159,14 +171,33 @@ class Trace {
   constructor(asyncId, stack) {
     this.asyncId = asyncId;
     this.stacks = [stack];
+    this.relatedTraces = [];
   }
 
-  recordRelatedTrace(trace) {
-    mergeStacks(trace.stacks, this.stacks);
+  recordRelatedTrace(relatedTrace) {
+    if (this.relatedTraces.includes(relatedTrace)) {
+      return;
+    }
+
+    this.relatedTraces.push(relatedTrace);
+
+    for (const subRelatedTrace of relatedTrace.walk()) {
+      mergeStacks(subRelatedTrace.stacks, this.stacks);
+    }
   }
 
   sortStacks() {
     this.stacks.sort((a, b) => b.asyncId - a.asyncId);
+  }
+
+  walk(visited=[this], depth=0) {
+    for (const trace of this.relatedTraces) {
+      if (!visited.includes(trace)) {
+        visited.push(trace);
+        trace.walk(visited, depth + 1);
+      }
+    }
+    return visited;
   }
 }
 
@@ -177,4 +208,3 @@ function mergeStacks(dest, source) {
     }
   }
 }
-
