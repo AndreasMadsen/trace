@@ -18,9 +18,11 @@ const traces = new Map();
 chain.filter.attach(function (error, frames) {
   return frames.filter(function (callSite) {
     const name = callSite && callSite.getFileName();
-    return (!name || name !== 'async_hooks.js');
+    return (!name || !INTERNALS.includes(name))
   });
 });
+
+const INTERNALS = ['async_hooks.js', 'internal/async_hooks.js'];
 
 chain.extend.attach(function (error, frames) {
   const lastTrace = traces.get(asyncHook.executionAsyncId());
