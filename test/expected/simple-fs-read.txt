@@ -4,14 +4,14 @@
 
 Error: trace
     at callback (/scripts/simple-fs-read.js:r:c)
-    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:r:c)
+    at FSReqCallback.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:r:c)
     at ReadFileContext.close (internal/fs/read_file_context.js:r:c)
-    at FSReqWrap.readFileAfterRead [as oncomplete] (internal/fs/read_file_context.js:r:c)
+    at FSReqCallback.readFileAfterRead [as oncomplete] (internal/fs/read_file_context.js:r:c)
     at ____________________:r:c
     at ReadFileContext.read (internal/fs/read_file_context.js:r:c)
-    at FSReqWrap.readFileAfterStat [as oncomplete] (fs.js:r:c)
+    at FSReqCallback.readFileAfterStat [as oncomplete] (fs.js:r:c)
     at ____________________:r:c
-    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:r:c)
+    at FSReqCallback.readFileAfterOpen [as oncomplete] (fs.js:r:c)
     at ____________________:r:c
     at Object.readFile (fs.js:r:c)
     at Object.<anonymous> (/scripts/simple-fs-read.js:r:c)

@@ -7,7 +7,7 @@ Error: trace
     at Object.onceWrapper (events.js:r:c)
     at Server.emit (events.js:r:c)
     at emitCloseNT (net.js:r:c)
-    at process._tickCallback (internal/process/next_tick.js:r:c)
+    at process.internalTickCallback (internal/process/next_tick.js:r:c)
     at new TickObject (internal/process/next_tick.js:r:c)
     at nextTick (internal/process/next_tick.js:r:c)
     at Server._emitCloseIfDrained (net.js:r:c)
@@ -16,7 +16,7 @@ Error: trace
     at Object.onceWrapper (events.js:r:c)
     at IncomingMessage.emit (events.js:r:c)
     at endReadableNT (_stream_readable.js:r:c)
-    at process._tickCallback (internal/process/next_tick.js:r:c)
+    at process.internalTickCallback (internal/process/next_tick.js:r:c)
     at ____________________:r:c
     at createServerHandle (net.js:r:c)
     at Server.setupListenHandle [as _listen2] (net.js:r:c)

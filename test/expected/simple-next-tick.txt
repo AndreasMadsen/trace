@@ -4,6 +4,7 @@
 
 Error: trace
     at callback (/scripts/simple-next-tick.js:r:c)
+    at internalTickCallback (internal/process/next_tick.js:r:c)
     at process._tickCallback (internal/process/next_tick.js:r:c)
     at Function.Module.runMain (internal/modules/cjs/loader.js:r:c)
     at startup (internal/bootstrap/node.js:r:c)
