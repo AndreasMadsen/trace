@@ -1,7 +1,6 @@
 Error: hello
-    at scopeThrow (/scripts/promise-child-stack.js:5:17)
-    at <anonymous>
+    at scopeThrow (/scripts/promise-child-stack.js:r:c)
     at Promise.then (<anonymous>)
-    at Object.<anonymous> (/scripts/promise-child-stack.js:4:15)
+    at Object.<anonymous> (/scripts/promise-child-stack.js:r:c)
     at Function.resolve (<anonymous>)
-    at Object.<anonymous> (/scripts/promise-child-stack.js:3:20)
+    at Object.<anonymous> (/scripts/promise-child-stack.js:r:c)

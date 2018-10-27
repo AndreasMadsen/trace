@@ -39,7 +39,7 @@ function prepareString(text) {
   const lines = stripPosInfo(text).split('\n');
 
   const processedLines = lines.map((line) => {
-    const isTraceLine = line.match(/:[0-9]+:[0-9]+/);
+    const isTraceLine = line.includes(':r:c');
     const isFromTestScript = line.includes(__dirname);
 
     const processedLine = line.replace(__dirname, '') + '\n';

@@ -3,8 +3,6 @@
         ^
 
 Error: trace
-    at Server.close (/scripts/regression-http-close.js:20:15)
-    at IncomingMessage.end (/scripts/regression-http-close.js:19:14)
-    at ClientRequest.get (/scripts/regression-http-close.js:16:9)
-    at Server.listen (/scripts/regression-http-close.js:15:8)
-    at Object.<anonymous> (/scripts/regression-http-close.js:11:4)
+    at Server.close (/scripts/regression-http-close.js:r:c)
+    at IncomingMessage.end (/scripts/regression-http-close.js:r:c)
+    at Object.<anonymous> (/scripts/regression-http-close.js:r:c)

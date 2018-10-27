@@ -3,5 +3,5 @@
   ^
 
 Error: trace
-    at Server.<anonymous> (/scripts/regression-net-socket.js:6:9)
-    at Object.<anonymous> (/scripts/regression-net-socket.js:9:8)
+    at Server.<anonymous> (/scripts/regression-net-socket.js:r:c)
+    at Object.<anonymous> (/scripts/regression-net-socket.js:r:c)

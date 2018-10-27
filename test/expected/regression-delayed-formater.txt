@@ -3,4 +3,4 @@ throw new Error('trace');
 ^
 
 Error: trace
-    at-hack Object.<anonymous> (/scripts/regression-delayed-formater.js:17:7)
+    at-hack Object.<anonymous> (/scripts/regression-delayed-formater.js:r:c)

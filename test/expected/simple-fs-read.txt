@@ -3,5 +3,5 @@
   ^
 
 Error: trace
-    at callback (/scripts/simple-fs-read.js:10:9)
-    at Object.<anonymous> (/scripts/simple-fs-read.js:9:4)
+    at callback (/scripts/simple-fs-read.js:r:c)
+    at Object.<anonymous> (/scripts/simple-fs-read.js:r:c)

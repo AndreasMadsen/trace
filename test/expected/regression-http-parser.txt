@@ -3,6 +3,6 @@
       ^
 
 Error: trace
-    at Socket.res.socket._read (/scripts/regression-http-parser.js:25:13)
-    at Server.<anonymous> (/scripts/regression-http-parser.js:16:8)
-    at Object.<anonymous> (/scripts/regression-http-parser.js:14:8)
+    at Socket.res.socket._read (/scripts/regression-http-parser.js:r:c)
+    at Server.<anonymous> (/scripts/regression-http-parser.js:r:c)
+    at Object.<anonymous> (/scripts/regression-http-parser.js:r:c)
