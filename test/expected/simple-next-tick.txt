@@ -4,13 +4,10 @@
 
 Error: trace
     at callback (/scripts/simple-next-tick.js:r:c)
-    at internalTickCallback (internal/process/next_tick.js:r:c)
     at process._tickCallback (internal/process/next_tick.js:r:c)
     at Function.Module.runMain (internal/modules/cjs/loader.js:r:c)
     at startup (internal/bootstrap/node.js:r:c)
     at bootstrapNodeJSCore (internal/bootstrap/node.js:r:c)
-    at emitInitNative (internal/async_hooks.js:r:c)
-    at emitInitScript (internal/async_hooks.js:r:c)
     at new TickObject (internal/process/next_tick.js:r:c)
     at process.nextTick (internal/process/next_tick.js:r:c)
     at Object.<anonymous> (/scripts/simple-next-tick.js:r:c)

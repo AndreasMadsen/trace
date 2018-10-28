@@ -18,7 +18,7 @@ const traces = new Map();
 chain.filter.attach(function (error, frames) {
   return frames.filter(function (callSite) {
     const name = callSite && callSite.getFileName();
-    return (!name || name !== 'async_hooks.js');
+    return (!name || (name !== 'async_hooks.js' && name !== 'internal/async_hooks.js'));
   });
 });
 
