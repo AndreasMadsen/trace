@@ -1,0 +1,14 @@
+/scripts/rethrow-callback.js:8
+      throw err;
+      ^
+
+Error: error
+    at asyncFunction (/scripts/rethrow-callback.js:2:30)
+    at mainFunction (/scripts/rethrow-callback.js:6:3)
+    at Object.<anonymous> (/scripts/rethrow-callback.js:13:1)
+    at ____________________:0:0
+    at nextTickFunction (/scripts/rethrow-callback.js:7:13)
+    at ____________________:0:0
+    at asyncFunction (/scripts/rethrow-callback.js:2:11)
+    at mainFunction (/scripts/rethrow-callback.js:6:3)
+    at Object.<anonymous> (/scripts/rethrow-callback.js:13:1)

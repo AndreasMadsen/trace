@@ -3,25 +3,7 @@
   ^
 
 Error: trace
-    at Server.<anonymous> (/scripts/regression-net-socket.js:r:c)
-    at Server.emit (events.js:r:c)
-    at TCP.onconnection (net.js:r:c)
-    at TCP.emitInitNative (internal/async_hooks.js:r:c)
-    at createServerHandle (net.js:r:c)
-    at Server.setupListenHandle [as _listen2] (net.js:r:c)
-    at listenInCluster (net.js:r:c)
-    at GetAddrInfoReqWrap.doListen [as callback] (net.js:r:c)
-    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:r:c)
-    at GetAddrInfoReqWrap.emitInitNative (internal/async_hooks.js:r:c)
-    at Object.lookup (dns.js:r:c)
-    at lookupAndListen (net.js:r:c)
-    at Server.listen (net.js:r:c)
-    at Object.<anonymous> (/scripts/regression-net-socket.js:r:c)
-    at Module._compile (module.js:r:c)
-    at Object.Module._extensions..js (module.js:r:c)
-    at Module.load (module.js:r:c)
-    at tryModuleLoad (module.js:r:c)
-    at Function.Module._load (module.js:r:c)
-    at Function.Module.runMain (module.js:r:c)
-    at startup (bootstrap_node.js:r:c)
-    at bootstrap_node.js:r:c
+    at Server.<anonymous> (/scripts/regression-net-socket.js:6:9)
+    at ____________________:0:0
+    at ____________________:0:0
+    at Object.<anonymous> (/scripts/regression-net-socket.js:9:8)

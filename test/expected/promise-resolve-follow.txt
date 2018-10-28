@@ -1,0 +1,21 @@
+Error: FAIL
+    at Timeout.setTimeout [as _onTimeout] (/scripts/promise-resolve-follow.js:4:14)
+    at ____________________:0:0
+    at new Promise (<anonymous>)
+    at f1 (/scripts/promise-resolve-follow.js:2:10)
+    at Promise (/scripts/promise-resolve-follow.js:11:5)
+    at ____________________:0:0
+    at new Promise (<anonymous>)
+    at f2 (/scripts/promise-resolve-follow.js:10:10)
+    at Promise.resolve.then (/scripts/promise-resolve-follow.js:17:17)
+    at <anonymous>
+    at ____________________:0:0
+    at Promise.catch (<anonymous>)
+    at f3 (/scripts/promise-resolve-follow.js:18:11)
+    at ____________________:0:0
+    at Promise.then (<anonymous>)
+    at f3 (/scripts/promise-resolve-follow.js:17:6)
+    at ____________________:0:0
+    at Function.resolve (<anonymous>)
+    at f3 (/scripts/promise-resolve-follow.js:16:18)
+    at Object.<anonymous> (/scripts/promise-resolve-follow.js:21:1)
