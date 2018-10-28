@@ -13,5 +13,8 @@
     "no-new-func": 0,
     "prefer-const": 1,
     "no-var": 1
-  }
+  },
+  "extends": [
+    "eslint:recommended"
+  ]
 }
