@@ -4,11 +4,12 @@ const interpreted = require('interpreted');
 const execspawn = require('execspawn');
 const endpoint = require('endpoint');
 const path = require('path');
+const process = require('process');
 
 const TRACE_PATH = path.resolve(__dirname, '../trace.js');
 const SCRIPTS_PATH = path.resolve(__dirname, 'scripts');
 
-const NODEJS_VERSION_MAJOR = Number.parseInt(require('process').versions.node.split('.')[0]);
+const NODEJS_VERSION_MAJOR = Number.parseInt(process.versions.node.split('.')[0]);
 const EXPECTED_PATH = NODEJS_VERSION_MAJOR >= 20 ? path.resolve(__dirname, 'expected', 'v20') : path.resolve(__dirname, 'expected')
 
 interpreted({
@@ -30,7 +31,7 @@ interpreted({
   types: {
     'txt': {
       test: function (t, actual, expected) {
-        t.strictEqual(actual, expected);
+        t.strictEqual(actual, expected.replace('v20.15.1', process.version));
       },
       update: function (actual) {
         return actual;
