@@ -1,0 +1,29 @@
+/scripts/simple-next-tick.js:8
+  throw new Error('trace');
+  ^
+
+Error: trace
+    at callback (/scripts/simple-next-tick.js:r:c)
+    at process.processTicksAndRejections (node:internal/process/task_queues:r:c)
+    at emitInitNative (node:internal/async_hooks:r:c)
+    at emitInitScript (node:internal/async_hooks:r:c)
+    at process.nextTick (node:internal/process/task_queues:r:c)
+    at Object.<anonymous> (/scripts/simple-next-tick.js:r:c)
+    at Module._compile (node:internal/modules/cjs/loader:r:c)
+    at Module._extensions..js (node:internal/modules/cjs/loader:r:c)
+    at Module.load (node:internal/modules/cjs/loader:r:c)
+    at Module._load (node:internal/modules/cjs/loader:r:c)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:r:c)
+    at node:internal/main/run_main_module:r:c {
+  [Symbol(originalCallSite)]: [ CallSite {}, CallSite {} ],
+  [Symbol(mutatedCallSite)]: [
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {}
+  ]
+}
+
+Node.js v20.15.1

@@ -1,0 +1,44 @@
+/scripts/regression-net-socket.js:6
+  throw new Error('trace');
+  ^
+
+Error: trace
+    at Server.<anonymous> (/scripts/regression-net-socket.js:r:c)
+    at Server.emit (node:events:r:c)
+    at TCP.onconnection (node:net:r:c)
+    at TCP.callbackTrampoline (node:internal/async_hooks:r:c)
+    at TCP.emitInitNative (node:internal/async_hooks:r:c)
+    at createServerHandle (node:net:r:c)
+    at Server.setupListenHandle [as _listen2] (node:net:r:c)
+    at listenInCluster (node:net:r:c)
+    at GetAddrInfoReqWrap.doListen [as callback] (node:net:r:c)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:r:c)
+    at GetAddrInfoReqWrap.callbackTrampoline (node:internal/async_hooks:r:c)
+    at GetAddrInfoReqWrap.emitInitNative (node:internal/async_hooks:r:c)
+    at Object.lookup (node:dns:r:c)
+    at lookupAndListen (node:net:r:c)
+    at Server.listen (node:net:r:c)
+    at Object.<anonymous> (/scripts/regression-net-socket.js:r:c)
+    at Module._compile (node:internal/modules/cjs/loader:r:c)
+    at Module._extensions..js (node:internal/modules/cjs/loader:r:c)
+    at Module.load (node:internal/modules/cjs/loader:r:c)
+    at Module._load (node:internal/modules/cjs/loader:r:c)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:r:c)
+    at node:internal/main/run_main_module:r:c {
+  [Symbol(originalCallSite)]: [ CallSite {}, CallSite {}, CallSite {}, CallSite {} ],
+  [Symbol(mutatedCallSite)]: [
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {}
+  ]
+}
+
+Node.js v20.15.1

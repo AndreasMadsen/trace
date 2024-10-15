@@ -1,0 +1,62 @@
+node:internal/url:797
+    this.#updateContext(bindingUrl.parse(input, base));
+                                   ^
+
+TypeError: Invalid URL
+    at new URL (node:internal/url:r:c)
+    at new ClientRequest (node:_http_client:r:c)
+    at request (node:http:r:c)
+    at Object.get (node:http:r:c)
+    at Server.<anonymous> (/scripts/regression-http-parser.js:r:c)
+    at Object.onceWrapper (node:events:r:c)
+    at Server.emit (node:events:r:c)
+    at emitListeningNT (node:net:r:c)
+    at process.processTicksAndRejections (node:internal/process/task_queues:r:c)
+    at emitInitNative (node:internal/async_hooks:r:c)
+    at emitInitScript (node:internal/async_hooks:r:c)
+    at nextTick (node:internal/process/task_queues:r:c)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:r:c)
+    at Server.setupListenHandle [as _listen2] (node:net:r:c)
+    at TCP.emitInitNative (node:internal/async_hooks:r:c)
+    at createServerHandle (node:net:r:c)
+    at Server.setupListenHandle [as _listen2] (node:net:r:c)
+    at listenInCluster (node:net:r:c)
+    at GetAddrInfoReqWrap.doListen [as callback] (node:net:r:c)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:r:c)
+    at GetAddrInfoReqWrap.callbackTrampoline (node:internal/async_hooks:r:c)
+    at GetAddrInfoReqWrap.emitInitNative (node:internal/async_hooks:r:c)
+    at Object.lookup (node:dns:r:c)
+    at lookupAndListen (node:net:r:c)
+    at Server.listen (node:net:r:c)
+    at Object.<anonymous> (/scripts/regression-http-parser.js:r:c)
+    at Module._compile (node:internal/modules/cjs/loader:r:c)
+    at Module._extensions..js (node:internal/modules/cjs/loader:r:c)
+    at Module.load (node:internal/modules/cjs/loader:r:c)
+    at Module._load (node:internal/modules/cjs/loader:r:c)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:r:c)
+    at node:internal/main/run_main_module:r:c {
+  code: 'ERR_INVALID_URL',
+  input: 'http://::r:c',
+  [Symbol(originalCallSite)]: [
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}
+  ],
+  [Symbol(mutatedCallSite)]: [
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}, CallSite {},
+    CallSite {}, CallSite {}
+  ]
+}
+
+Node.js v20.15.1

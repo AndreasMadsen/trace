@@ -7,16 +7,19 @@ const path = require('path');
 
 const SCRIPTS_PATH = path.resolve(__dirname, 'scripts');
 
+const NODEJS_VERSION_MAJOR = Number.parseInt(require('process').versions.node.split('.')[0]);
+const EXPECTED_PATH = NODEJS_VERSION_MAJOR >= 20 ? path.resolve(__dirname, 'expected', 'v20') : path.resolve(__dirname, 'expected')
+
 interpreted({
   source: SCRIPTS_PATH,
-  expected: path.resolve(__dirname, 'expected'),
+  expected: EXPECTED_PATH,
   readSource: false,
 
   update: false,
 
   test: function (name, callback) {
     const filepath = path.join(SCRIPTS_PATH, name + '.js');
-    const p = execspawn(`${process.execPath} -r ../trace.js --stack-trace-limit=1000 ${JSON.stringify(filepath)} 2>&1`);
+    const p = execspawn(`${process.execPath} -r ./trace.js --stack-trace-limit=1000 ${JSON.stringify(filepath)} 2>&1`);
     p.stdout.pipe(endpoint(function (err, output) {
       if (err) return callback(err);
       callback(null, stripPosInfo(stripPath(output.toString('ascii'))));
