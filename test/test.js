@@ -5,6 +5,7 @@ const execspawn = require('execspawn');
 const endpoint = require('endpoint');
 const path = require('path');
 
+const TRACE_PATH = path.resolve(__dirname, '../trace.js');
 const SCRIPTS_PATH = path.resolve(__dirname, 'scripts');
 
 const NODEJS_VERSION_MAJOR = Number.parseInt(require('process').versions.node.split('.')[0]);
@@ -19,7 +20,7 @@ interpreted({
 
   test: function (name, callback) {
     const filepath = path.join(SCRIPTS_PATH, name + '.js');
-    const p = execspawn(`${process.execPath} -r ./trace.js --stack-trace-limit=1000 ${JSON.stringify(filepath)} 2>&1`);
+    const p = execspawn(`${process.execPath} -r ${TRACE_PATH} --stack-trace-limit=1000 ${JSON.stringify(filepath)} 2>&1`);
     p.stdout.pipe(endpoint(function (err, output) {
       if (err) return callback(err);
       callback(null, stripPosInfo(stripPath(output.toString('ascii'))));
