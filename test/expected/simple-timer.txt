@@ -4,19 +4,31 @@
 
 Error: trace
     at Timeout.callback [as _onTimeout] (/scripts/simple-timer.js:r:c)
-    at ontimeout (timers.js:r:c)
-    at tryOnTimeout (timers.js:r:c)
-    at listOnTimeout (timers.js:r:c)
-    at processTimers (timers.js:r:c)
-    at initAsyncResource (internal/timers.js:r:c)
-    at new Timeout (internal/timers.js:r:c)
-    at setTimeout (timers.js:r:c)
+    at listOnTimeout (node:internal/timers:r:c)
+    at process.processTimers (node:internal/timers:r:c)
+    at initAsyncResource (node:internal/timers:r:c)
+    at new Timeout (node:internal/timers:r:c)
+    at setTimeout (node:timers:r:c)
     at Object.<anonymous> (/scripts/simple-timer.js:r:c)
-    at Module._compile (internal/modules/cjs/loader.js:r:c)
-    at Object.Module._extensions..js (internal/modules/cjs/loader.js:r:c)
-    at Module.load (internal/modules/cjs/loader.js:r:c)
-    at tryModuleLoad (internal/modules/cjs/loader.js:r:c)
-    at Function.Module._load (internal/modules/cjs/loader.js:r:c)
-    at Function.Module.runMain (internal/modules/cjs/loader.js:r:c)
-    at startup (internal/bootstrap/node.js:r:c)
-    at bootstrapNodeJSCore (internal/bootstrap/node.js:r:c)
+    at Module._compile (node:internal/modules/cjs/loader:r:c)
+    at Module._extensions..js (node:internal/modules/cjs/loader:r:c)
+    at Module.load (node:internal/modules/cjs/loader:r:c)
+    at Module._load (node:internal/modules/cjs/loader:r:c)
+    at TracingChannel.traceSync (node:diagnostics_channel:r:c)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:r:c)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:r:c)
+    at node:internal/main/run_main_module:r:c {
+  [Symbol(originalCallSite)]: [ CallSite {}, CallSite {}, CallSite {} ],
+  [Symbol(mutatedCallSite)]: [
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}
+  ]
+}
+
+Node.js vx.y.z

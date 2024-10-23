@@ -4,19 +4,34 @@
 
 Error: trace
     at callback (/scripts/simple-fs-read.js:r:c)
-    at FSReqCallback.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:r:c)
-    at ReadFileContext.close (internal/fs/read_file_context.js:r:c)
-    at FSReqCallback.readFileAfterRead [as oncomplete] (internal/fs/read_file_context.js:r:c)
-    at ReadFileContext.read (internal/fs/read_file_context.js:r:c)
-    at FSReqCallback.readFileAfterStat [as oncomplete] (fs.js:r:c)
-    at FSReqCallback.readFileAfterOpen [as oncomplete] (fs.js:r:c)
-    at Object.readFile (fs.js:r:c)
+    at FSReqCallback.readFileAfterClose [as oncomplete] (node:internal/fs/read/context:r:c)
+    at ReadFileContext.close (node:internal/fs/read/context:r:c)
+    at FSReqCallback.readFileAfterRead [as oncomplete] (node:internal/fs/read/context:r:c)
+    at ReadFileContext.read (node:internal/fs/read/context:r:c)
+    at FSReqCallback.readFileAfterStat [as oncomplete] (node:fs:r:c)
+    at FSReqCallback.readFileAfterOpen [as oncomplete] (node:fs:r:c)
+    at Object.readFile (node:fs:r:c)
     at Object.<anonymous> (/scripts/simple-fs-read.js:r:c)
-    at Module._compile (internal/modules/cjs/loader.js:r:c)
-    at Object.Module._extensions..js (internal/modules/cjs/loader.js:r:c)
-    at Module.load (internal/modules/cjs/loader.js:r:c)
-    at tryModuleLoad (internal/modules/cjs/loader.js:r:c)
-    at Function.Module._load (internal/modules/cjs/loader.js:r:c)
-    at Function.Module.runMain (internal/modules/cjs/loader.js:r:c)
-    at startup (internal/bootstrap/node.js:r:c)
-    at bootstrapNodeJSCore (internal/bootstrap/node.js:r:c)
+    at Module._compile (node:internal/modules/cjs/loader:r:c)
+    at Module._extensions..js (node:internal/modules/cjs/loader:r:c)
+    at Module.load (node:internal/modules/cjs/loader:r:c)
+    at Module._load (node:internal/modules/cjs/loader:r:c)
+    at TracingChannel.traceSync (node:diagnostics_channel:r:c)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:r:c)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:r:c)
+    at node:internal/main/run_main_module:r:c {
+  [Symbol(originalCallSite)]: [ CallSite {}, CallSite {}, CallSite {} ],
+  [Symbol(mutatedCallSite)]: [
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}
+  ]
+}
+
+Node.js vx.y.z

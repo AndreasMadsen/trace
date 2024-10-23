@@ -4,11 +4,28 @@ throw new Error('trace');
 
 Error: trace
     at-hack Object.<anonymous> (/scripts/regression-delayed-formater.js:r:c)
-    at-hack Module._compile (internal/modules/cjs/loader.js:r:c)
-    at-hack Object.Module._extensions..js (internal/modules/cjs/loader.js:r:c)
-    at-hack Module.load (internal/modules/cjs/loader.js:r:c)
-    at-hack tryModuleLoad (internal/modules/cjs/loader.js:r:c)
-    at-hack Function.Module._load (internal/modules/cjs/loader.js:r:c)
-    at-hack Function.Module.runMain (internal/modules/cjs/loader.js:r:c)
-    at-hack startup (internal/bootstrap/node.js:r:c)
-    at-hack bootstrapNodeJSCore (internal/bootstrap/node.js:r:c)
+    at-hack Module._compile (node:internal/modules/cjs/loader:r:c)
+    at-hack Module._extensions..js (node:internal/modules/cjs/loader:r:c)
+    at-hack Module.load (node:internal/modules/cjs/loader:r:c)
+    at-hack Module._load (node:internal/modules/cjs/loader:r:c)
+    at-hack TracingChannel.traceSync (node:diagnostics_channel:r:c)
+    at-hack wrapModuleLoad (node:internal/modules/cjs/loader:r:c)
+    at-hack Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:r:c)
+    at-hack node:internal/main/run_main_module:r:c {
+  [Symbol(originalCallSite)]: [
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}
+  ],
+  [Symbol(mutatedCallSite)]: [
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}
+  ]
+}
+
+Node.js vx.y.z
