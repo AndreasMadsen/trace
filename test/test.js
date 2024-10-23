@@ -15,7 +15,7 @@ interpreted({
   expected: EXPECTED_PATH,
   readSource: false,
 
-  update: true,
+  update: false,
 
   test: function (name, callback) {
     const filepath = path.join(SCRIPTS_PATH, name + '.js');
