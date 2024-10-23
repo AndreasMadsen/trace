@@ -4,22 +4,38 @@
 
 Error: trace
     at Server.<anonymous> (/scripts/regression-net-socket.js:r:c)
-    at Server.emit (events.js:r:c)
-    at TCP.onconnection (net.js:r:c)
-    at createServerHandle (net.js:r:c)
-    at Server.setupListenHandle [as _listen2] (net.js:r:c)
-    at listenInCluster (net.js:r:c)
-    at GetAddrInfoReqWrap.doListen [as callback] (net.js:r:c)
-    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:r:c)
-    at Object.lookup (dns.js:r:c)
-    at lookupAndListen (net.js:r:c)
-    at Server.listen (net.js:r:c)
+    at Server.emit (node:events:r:c)
+    at TCP.onconnection (node:net:r:c)
+    at createServerHandle (node:net:r:c)
+    at Server.setupListenHandle [as _listen2] (node:net:r:c)
+    at listenInCluster (node:net:r:c)
+    at GetAddrInfoReqWrap.callback (node:net:r:c)
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:r:c)
+    at Object.lookup (node:dns:r:c)
+    at lookupAndListen (node:net:r:c)
+    at Server.listen (node:net:r:c)
     at Object.<anonymous> (/scripts/regression-net-socket.js:r:c)
-    at Module._compile (internal/modules/cjs/loader.js:r:c)
-    at Object.Module._extensions..js (internal/modules/cjs/loader.js:r:c)
-    at Module.load (internal/modules/cjs/loader.js:r:c)
-    at tryModuleLoad (internal/modules/cjs/loader.js:r:c)
-    at Function.Module._load (internal/modules/cjs/loader.js:r:c)
-    at Function.Module.runMain (internal/modules/cjs/loader.js:r:c)
-    at startup (internal/bootstrap/node.js:r:c)
-    at bootstrapNodeJSCore (internal/bootstrap/node.js:r:c)
+    at Module._compile (node:internal/modules/cjs/loader:r:c)
+    at Module._extensions..js (node:internal/modules/cjs/loader:r:c)
+    at Module.load (node:internal/modules/cjs/loader:r:c)
+    at Module._load (node:internal/modules/cjs/loader:r:c)
+    at TracingChannel.traceSync (node:diagnostics_channel:r:c)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:r:c)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:r:c)
+    at node:internal/main/run_main_module:r:c {
+  [Symbol(originalCallSite)]: [ CallSite {}, CallSite {}, CallSite {}, CallSite {} ],
+  [Symbol(mutatedCallSite)]: [
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {},
+    CallSite {}, CallSite {}
+  ]
+}
+
+Node.js vx.y.z
